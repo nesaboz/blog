@@ -1,0 +1,20 @@
+project:
+  type: website
+
+website:
+  title: "Nenad Bozinovic"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - about.qmd
+      - more.qmd
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+
+
