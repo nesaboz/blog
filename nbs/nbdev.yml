@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "Nenad Bozinovic"
+  site-url: "https://nesaboz.github.io/website"
+  description: "My personal website"
+  repo-branch: main
+  repo-url: "https://github.com/nesaboz/website"

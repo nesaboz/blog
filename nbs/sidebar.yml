@@ -1,0 +1,7 @@
+website:
+  sidebar:
+    contents:
+      - index.qmd
+      - 01_publications.ipynb
+      - 02_press.qmd
+      - 03_about.qmd

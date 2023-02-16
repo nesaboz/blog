@@ -1,1 +1,5 @@
 /.quarto/
+_proc/
+.idea/
+/._site
+.Rproj.user

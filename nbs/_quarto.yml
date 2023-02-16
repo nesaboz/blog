@@ -1,0 +1,30 @@
+project:
+  type: website
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+website:
+  twitter-card: true
+  open-graph: true
+  repo-actions: [issue]
+  sidebar:
+    style: floating
+  navbar:
+    background: primary
+    search: true
+    collapse-below: lg
+    right:
+      - icon: github
+        href: "https://github.com/nesaboz"
+      - icon: twitter
+        href: https://twitter.com/nesaboz
+        aria-label: Twitter
+      - icon: linkedin
+        href: https://www.linkedin.com/in/nenadbozinovic/
+        aria-label: Linkedin
+
+metadata-files: [nbdev.yml, sidebar.yml]

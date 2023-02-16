@@ -1,0 +1,32 @@
+https://www.w3schools.com/howto/howto_html_favicon.asp
+
+
+https://github.com/nesaboz/website/raw/main/assets/
+
+
+
+
+```{python}
+import os
+from nbdev import qmd
+def im(fn, width, **kw):
+    return qmd.img(f"/press/{fn}", width=f"{width}%", **kw)
+
+table = [
+    ('01.jpg', 'Science Magazine', 'http://www.sciencemag.org/content/340/6140/1513.summary'),
+    ('011.jpeg', 'Nature', 'https://www.nature.com/articles/nature.2013.13291'),
+    ('02.png', 'NBC News', 'http://www.nbcnews.com/id/52334356/ns/technology_and_science-tech_and_gadgets/t/researchers-cram-more-info-fiber-optics/'),
+    ('03.png', 'BBC News', 'http://www.bbc.co.uk/news/science-environment-23096320'),
+    ('04.jpg', ' News', ''),
+    ('05.png', 'NBC News', ''),
+    ('06.png', 'NBC News', ''),
+    ('07.png', 'NBC News', ''),
+    ('08.png', 'NBC News', '')
+    ]
+
+print(qmd.tbl_row(['', '', '']))
+print(qmd.tbl_sep([100, 100, 100]))
+for image, name, link in table:
+    print(qmd.tbl_row([im(image, 90), f"[{name}]({link})"]))
+    print(qmd.tbl_row(['', '', '']))
+```
