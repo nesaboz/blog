@@ -1,5 +1,8 @@
 website:
   sidebar:
+    background: light
+    pinned: True
+    style: "docked"
     contents:
       - index.ipynb
       - 01_publications.ipynb
