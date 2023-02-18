@@ -2,25 +2,25 @@ website:
   sidebar:
     contents:
       - index.ipynb
-      - 01_publications.ipynb
-      - 02_press.qmd
-      - 03_about.qmd
+      - publications.ipynb
+      - press.qmd
+      - about.qmd
       - section: Projects
         contents:
           - projects/solar/solar.qmd
       - section: Mini-projects
         contents:
-          - pytorched/index.ipynb
-          - pytorched/01_linear_regression.ipynb
-          - pytorched/02_quadratic_function_fit.ipynb
-          - pytorched/03_binary_classification.ipynb
-          - pytorched/04_1_binary_image_classification.ipynb
-          - pytorched/04_2_torchvision_conversions_samplers.ipynb
-          - pytorched/05_multiclass_image_classification.ipynb
-          - pytorched/06_rock_paper_scissors.ipynb
-          - pytorched/07_transfer_learning.ipynb
-          - pytorched/08_labeling.ipynb
-          - pytorched/09_bear_classifier.ipynb
+          - mini-projects/index.ipynb
+          - mini-projects/01_linear_regression.ipynb
+          - mini-projects/02_quadratic_function_fit.ipynb
+          - mini-projects/03_binary_classification.ipynb
+          - mini-projects/04_1_binary_image_classification.ipynb
+          - mini-projects/04_2_torchvision_conversions_samplers.ipynb
+          - mini-projects/05_multiclass_image_classification.ipynb
+          - mini-projects/06_rock_paper_scissors.ipynb
+          - mini-projects/07_transfer_learning.ipynb
+          - mini-projects/08_labeling.ipynb
+          - mini-projects/09_bear_classifier.ipynb
       - section: Utils
         contents:
           - section: Python
