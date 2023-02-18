@@ -1,10 +1,63 @@
 website:
   sidebar:
-    background: light
-    pinned: True
-    style: "docked"
     contents:
       - index.ipynb
       - 01_publications.ipynb
       - 02_press.qmd
       - 03_about.qmd
+      - section: Projects
+        contents:
+          - projects/solar/solar.qmd
+      - section: Mini-projects
+        contents:
+          - pytorched/index.ipynb
+          - pytorched/01_linear_regression.ipynb
+          - pytorched/02_quadratic_function_fit.ipynb
+          - pytorched/03_binary_classification.ipynb
+          - pytorched/04_1_binary_image_classification.ipynb
+          - pytorched/04_2_torchvision_conversions_samplers.ipynb
+          - pytorched/05_multiclass_image_classification.ipynb
+          - pytorched/06_rock_paper_scissors.ipynb
+          - pytorched/07_transfer_learning.ipynb
+          - pytorched/08_labeling.ipynb
+          - pytorched/09_bear_classifier.ipynb
+      - section: Utils
+        contents:
+          - section: Python
+            contents:
+              - utils/010_Python/FileIO.ipynb
+              - utils/010_Python/Numpy.ipynb
+              - utils/010_Python/PIL.ipynb
+              - utils/010_Python/Pathlib.ipynb
+              - utils/010_Python/PyTest.ipynb
+              - utils/010_Python/Regex.ipynb
+              - utils/010_Python/SetOperations.ipynb
+              - utils/010_Python/Visualizations.ipynb
+              - utils/010_Python/functools.ipynb
+          - section: Jupyter
+            contents:
+              - utils/020_Jupyter/Images.ipynb
+              - utils/020_Jupyter/Kernels.ipynb
+              - utils/020_Jupyter/General.ipynb
+              - utils/020_Jupyter/matplotlib.ipynb
+          - section: Terminal
+            contents:
+              - utils/030_Terminal/MakeNewRepo.ipynb
+              - utils/030_Terminal/zsh.ipynb
+          - section: PyTorch
+            contents:
+              - utils/040_PyTorch/Models.ipynb
+              - utils/040_PyTorch/Tensor.ipynb
+              - utils/040_PyTorch/convolutions.ipynb
+              - utils/040_PyTorch/loss.ipynb
+          - section: FastAI
+            contents:
+              - utils/050_FastAI/Azure.ipynb
+              - utils/050_FastAI/FastAI.ipynb
+              - utils/050_FastAI/HuggingFace.ipynb
+              - utils/050_FastAI/nbdev.ipynb
+          - section: Misc
+            contents:
+              - utils/060_Misc/Git.ipynb
+              - utils/060_Misc/MacOS.ipynb
+              - utils/060_Misc/Obsidian.ipynb

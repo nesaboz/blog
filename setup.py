@@ -1,7 +1,10 @@
-from pkg_resources import parse_version
 from configparser import ConfigParser
-import setuptools, shlex
-assert parse_version(setuptools.__version__)>=parse_version('36.2')
+
+import setuptools
+import shlex
+from pkg_resources import parse_version
+
+assert parse_version(setuptools.__version__) >= parse_version('36.2')
 
 # note: all settings are in settings.ini; edit there, not here
 config = ConfigParser(delimiters=['='])
@@ -20,8 +23,13 @@ licenses = {
     'gpl3': ('GNU General Public License v3', 'OSI Approved :: GNU General Public License v3 (GPLv3)'),
     'bsd3': ('BSD License', 'OSI Approved :: BSD License'),
 }
-statuses = [ '1 - Planning', '2 - Pre-Alpha', '3 - Alpha',
-    '4 - Beta', '5 - Production/Stable', '6 - Mature', '7 - Inactive' ]
+statuses = ['1 - Planning',
+            '2 - Pre-Alpha',
+            '3 - Alpha',
+            '4 - Beta',
+            '5 - Production/Stable',
+            '6 - Mature',
+            '7 - Inactive']
 py_versions = '3.6 3.7 3.8 3.9 3.10'.split()
 
 requirements = shlex.split(cfg.get('requirements', ''))
@@ -38,7 +46,7 @@ setuptools.setup(
         'Intended Audience :: ' + cfg['audience'].title(),
         'Natural Language :: ' + cfg['language'].title(),
     ] + ['Programming Language :: Python :: '+o for o in py_versions[py_versions.index(min_python):]] + (['License :: ' + lic[1] ] if lic[1] else []),
-    url = cfg['git_url'],
+    url=cfg['git_url'],
     packages = setuptools.find_packages(),
     include_package_data = True,
     install_requires = requirements,
