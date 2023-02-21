@@ -26,14 +26,14 @@ website:
             contents:
               - utils/010_Python/Datetime.ipynb
               - utils/010_Python/FileIO.ipynb
-              - utils/010_Python/Numpy.ipynb
-              - utils/010_Python/PIL.ipynb
+              - utils/010_Python/functools.ipynb
               - utils/010_Python/Pathlib.ipynb
+              - utils/010_Python/PIL.ipynb
               - utils/010_Python/PyTest.ipynb
               - utils/010_Python/Regex.ipynb
+              - utils/010_Python/Scipy.ipynb
               - utils/010_Python/SetOperations.ipynb
               - utils/010_Python/Visualizations.ipynb
-              - utils/010_Python/functools.ipynb
           - section: Jupyter
             contents:
               - utils/020_Jupyter/Images.ipynb
@@ -46,10 +46,12 @@ website:
               - utils/030_Terminal/zsh.ipynb
           - section: PyTorch
             contents:
-              - utils/040_PyTorch/Models.ipynb
-              - utils/040_PyTorch/Tensor.ipynb
+              - utils/040_PyTorch/Augmentations.ipynb
               - utils/040_PyTorch/convolutions.ipynb
               - utils/040_PyTorch/loss.ipynb
+              - utils/040_PyTorch/metrics.ipynb
+              - utils/040_PyTorch/Models.ipynb
+              - utils/040_PyTorch/Tensor.ipynb
           - section: FastAI
             contents:
               - utils/050_FastAI/Azure.ipynb
@@ -59,5 +61,7 @@ website:
           - section: Misc
             contents:
               - utils/060_Misc/Git.ipynb
+              - utils/060_Misc/JarvisLabsai.ipynb
+              - utils/060_Misc/Latex.ipynb
               - utils/060_Misc/MacOS.ipynb
-              - utils/060_Misc/Obsidian.ipynb
+              - utils/060_Misc/Web.ipynb

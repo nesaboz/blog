@@ -3,3 +3,5 @@ _proc/
 .idea/
 /._site
 .Rproj.user
+
+/nbs/mini-projects/bear_images
