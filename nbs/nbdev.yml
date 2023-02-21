@@ -3,7 +3,7 @@ project:
 
 website:
   title: "Nenad Bozinovic"
-  site-url: "https://nesaboz.github.io/website"
+  site-url: "https://nesaboz.github.io/blog"
   description: "My personal website"
   repo-branch: main
-  repo-url: "https://github.com/nesaboz/website"
+  repo-url: "https://github.com/nesaboz/blog"
