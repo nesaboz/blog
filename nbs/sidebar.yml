@@ -3,7 +3,6 @@ website:
     contents:
       - index.ipynb
       - publications.ipynb
-      - press.qmd
       - about.qmd
       - section: Projects
         contents:
@@ -25,6 +24,7 @@ website:
         contents:
           - section: Python
             contents:
+              - utils/010_Python/Datetime.ipynb
               - utils/010_Python/FileIO.ipynb
               - utils/010_Python/Numpy.ipynb
               - utils/010_Python/PIL.ipynb
