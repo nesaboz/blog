@@ -12,7 +12,15 @@ about:
       href: https://github.com
 ---
 
-I'm a software engineer with PhD in Optics. When not messing with code, I arm-wrestle with my 3-year old twins,
-(try to) do yoga, and honing my darts' skills.
+I'm a software engineer with PhD in Electrical Engineering. I've published
+Science Journal paper with 2500+ [citations](https://scholar.google.com/citations?user=2yl9qR4AAAAJ&hl=en),
+[patented](https://testpubchem.ncbi.nlm.nih.gov/patent/WO-2020243015-A1) instrument software that enabled COVID-19 antibody
+[discovery](https://www.berkeleylights.com/blog/racing-to-find-the-right-cells-our-covid-19-success-stories/), and built optical
+instruments that went to the bottom of the
+ocean. I'm passionate about machine learning,
+innovation, and great teams.
+
+When not messing with code, I arm-wrestle with my 3-year old twins, do yoga,
+mountain bike, ski, kite-surf and hone my darts' skills.
 
 [email me](mailto:nesaboz@gmail.com)
