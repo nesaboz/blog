@@ -34,6 +34,7 @@ website:
               - utils/010_Python/Scipy.ipynb
               - utils/010_Python/SetOperations.ipynb
               - utils/010_Python/Visualizations.ipynb
+              - utils/010_Python/General.ipynb
           - section: Jupyter
             contents:
               - utils/020_Jupyter/Images.ipynb
