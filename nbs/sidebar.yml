@@ -2,14 +2,13 @@ website:
   sidebar:
     contents:
       - index.ipynb
-      - publications.ipynb
-      - about.qmd
       - section: Projects
+        file: projects.ipynb
         contents:
           - projects/solar/solar.qmd
       - section: Mini-projects
+        file: mini-projects.ipynb
         contents:
-          - mini-projects/index.ipynb
           - mini-projects/01_linear_regression.ipynb
           - mini-projects/02_quadratic_function_fit.ipynb
           - mini-projects/03_binary_classification.ipynb
@@ -20,49 +19,50 @@ website:
           - mini-projects/07_transfer_learning.ipynb
           - mini-projects/08_labeling.ipynb
           - mini-projects/09_bear_classifier.ipynb
-      - section: Utils
+      - section: Tips
+        file: tips.ipynb
         contents:
           - section: Python
             contents:
-              - utils/010_Python/Datetime.ipynb
-              - utils/010_Python/FileIO.ipynb
-              - utils/010_Python/functools.ipynb
-              - utils/010_Python/Pathlib.ipynb
-              - utils/010_Python/PIL.ipynb
-              - utils/010_Python/PyTest.ipynb
-              - utils/010_Python/Regex.ipynb
-              - utils/010_Python/Scipy.ipynb
-              - utils/010_Python/SetOperations.ipynb
-              - utils/010_Python/Visualizations.ipynb
-              - utils/010_Python/General.ipynb
+              - tips/010_Python/Datetime.ipynb
+              - tips/010_Python/FileIO.ipynb
+              - tips/010_Python/functools.ipynb
+              - tips/010_Python/Pathlib.ipynb
+              - tips/010_Python/PIL.ipynb
+              - tips/010_Python/PyTest.ipynb
+              - tips/010_Python/Regex.ipynb
+              - tips/010_Python/Scipy.ipynb
+              - tips/010_Python/SetOperations.ipynb
+              - tips/010_Python/Visualizations.ipynb
+              - tips/010_Python/General.ipynb
           - section: Jupyter
             contents:
-              - utils/020_Jupyter/Images.ipynb
-              - utils/020_Jupyter/Kernels.ipynb
-              - utils/020_Jupyter/General.ipynb
-              - utils/020_Jupyter/matplotlib.ipynb
+              - tips/020_Jupyter/Images.ipynb
+              - tips/020_Jupyter/Kernels.ipynb
+              - tips/020_Jupyter/General.ipynb
+              - tips/020_Jupyter/matplotlib.ipynb
           - section: Terminal
             contents:
-              - utils/030_Terminal/MakeNewRepo.ipynb
-              - utils/030_Terminal/zsh.ipynb
+              - tips/030_Terminal/MakeNewRepo.ipynb
+              - tips/030_Terminal/zsh.ipynb
           - section: PyTorch
             contents:
-              - utils/040_PyTorch/Augmentations.ipynb
-              - utils/040_PyTorch/convolutions.ipynb
-              - utils/040_PyTorch/loss.ipynb
-              - utils/040_PyTorch/metrics.ipynb
-              - utils/040_PyTorch/Models.ipynb
-              - utils/040_PyTorch/Tensor.ipynb
+              - tips/040_PyTorch/Augmentations.ipynb
+              - tips/040_PyTorch/convolutions.ipynb
+              - tips/040_PyTorch/loss.ipynb
+              - tips/040_PyTorch/metrics.ipynb
+              - tips/040_PyTorch/Models.ipynb
+              - tips/040_PyTorch/Tensor.ipynb
           - section: FastAI
             contents:
-              - utils/050_FastAI/Azure.ipynb
-              - utils/050_FastAI/FastAI.ipynb
-              - utils/050_FastAI/HuggingFace.ipynb
-              - utils/050_FastAI/nbdev.ipynb
+              - tips/050_FastAI/Azure.ipynb
+              - tips/050_FastAI/FastAI.ipynb
+              - tips/050_FastAI/HuggingFace.ipynb
+              - tips/050_FastAI/nbdev.ipynb
           - section: Misc
             contents:
-              - utils/060_Misc/Git.ipynb
-              - utils/060_Misc/JarvisLabsai.ipynb
-              - utils/060_Misc/Latex.ipynb
-              - utils/060_Misc/MacOS.ipynb
-              - utils/060_Misc/Web.ipynb
+              - tips/060_Misc/Git.ipynb
+              - tips/060_Misc/JarvisLabsai.ipynb
+              - tips/060_Misc/Latex.ipynb
+              - tips/060_Misc/MacOS.ipynb
+              - tips/060_Misc/Web.ipynb

@@ -18,6 +18,14 @@ website:
     background: primary
     search: true
     collapse-below: lg
+    left:
+      - text: Projects
+        file: projects.ipynb
+      - text: Mini-projects
+        file: mini-projects.ipynb
+      - text: Media
+        file: media.ipynb
+      - about.qmd
     right:
       - icon: github
         href: "https://github.com/nesaboz"
