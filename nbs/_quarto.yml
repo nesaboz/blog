@@ -23,6 +23,8 @@ website:
         file: projects.ipynb
       - text: Mini-projects
         file: mini-projects.ipynb
+      - text: Tips
+        file: tips.ipynb
       - text: Media
         file: media.ipynb
       - about.qmd

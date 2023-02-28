@@ -66,3 +66,6 @@ website:
               - tips/060_Misc/Latex.ipynb
               - tips/060_Misc/MacOS.ipynb
               - tips/060_Misc/Web.ipynb
+      - media.ipynb
+      - about.qmd
+
