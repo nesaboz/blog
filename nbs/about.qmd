@@ -10,6 +10,7 @@ about:
     - icon: github
       text: Github
       href: https://github.com
+comments: false
 ---
 
 I'm a software engineer with PhD in Electrical Engineering. I've published

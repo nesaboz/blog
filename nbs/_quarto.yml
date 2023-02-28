@@ -39,3 +39,13 @@ website:
         aria-label: Linkedin
 
 metadata-files: [nbdev.yml, sidebar.yml]
+
+comments:
+  giscus:
+    repo: nesaboz/blog
+    repo-id: R_kgDOI-Xebw
+    category: Announcements
+    category-id: DIC_kwDOI-Xeb84CUjh-
+    mapping: pathname
+    loading: lazy
+    input-position: bottom
