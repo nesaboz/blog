@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qsk-deploy
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      project: diy
+  minReadySeconds: 20        
+  strategy:                  
+    type: RollingUpdate      
+    rollingUpdate:           
+      maxSurge: 2            
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        project: diy
+    spec: 
+      containers:
+      - name: qsk-pod
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        image: nesaboz/qsk-course:1.1
+

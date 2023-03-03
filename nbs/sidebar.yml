@@ -18,6 +18,7 @@ website:
           - mini-projects/07_transfer_learning.ipynb
           - mini-projects/08_labeling.ipynb
           - mini-projects/09_bear_classifier.ipynb
+          - mini-projects/10_kubernets/10_kubernets.ipynb
       - section: Tips
         file: tips.ipynb
         contents:
