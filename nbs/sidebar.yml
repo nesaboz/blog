@@ -9,7 +9,7 @@ website:
         file: mini-projects.ipynb
         contents:
           - mini-projects/10_kubernets/10_kubernets.ipynb
-          - mini-projects/09_bear_classifier.ipynb
+          - mini-projects/09_bear_classifier/09_bear_classifier.ipynb
           - mini-projects/08_labeling.ipynb
           - mini-projects/07_transfer_learning.ipynb
           - mini-projects/06_rock_paper_scissors.ipynb

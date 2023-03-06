@@ -4,7 +4,7 @@ _proc/
 /._site
 .Rproj.user
 
-/nbs/mini-projects/bear_images
+/nbs/mini-projects/09_bear_classifier/bear_images
 _docs/
 /**/.ipynb_checkpoints
 nbs/mini-projects/runs/
