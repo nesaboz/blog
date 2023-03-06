@@ -8,17 +8,18 @@ website:
       - section: Mini-projects
         file: mini-projects.ipynb
         contents:
-          - mini-projects/01_linear_regression.ipynb
-          - mini-projects/02_quadratic_function_fit.ipynb
-          - mini-projects/03_binary_classification.ipynb
-          - mini-projects/04_1_binary_image_classification.ipynb
-          - mini-projects/04_2_torchvision_conversions_samplers.ipynb
-          - mini-projects/05_multiclass_image_classification.ipynb
-          - mini-projects/06_rock_paper_scissors.ipynb
-          - mini-projects/07_transfer_learning.ipynb
-          - mini-projects/08_labeling.ipynb
-          - mini-projects/09_bear_classifier.ipynb
           - mini-projects/10_kubernets/10_kubernets.ipynb
+          - mini-projects/09_bear_classifier.ipynb
+          - mini-projects/08_labeling.ipynb
+          - mini-projects/07_transfer_learning.ipynb
+          - mini-projects/06_rock_paper_scissors.ipynb
+          - mini-projects/05_multiclass_image_classification.ipynb
+          - mini-projects/04_2_torchvision_conversions_samplers.ipynb
+          - mini-projects/04_1_binary_image_classification.ipynb
+          - mini-projects/03_binary_classification.ipynb
+          - mini-projects/02_quadratic_function_fit.ipynb
+          - mini-projects/01_linear_regression.ipynb
+
       - section: Tips
         file: tips.ipynb
         contents:
