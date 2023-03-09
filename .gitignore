@@ -10,3 +10,13 @@ _docs/
 nbs/mini-projects/runs/
 /nbs/mini-projects/10_kubernets/usercode/config
 /nbs/dev/11_titanic/data
+/**/.DS_Store
+/pytorched/__pycache__
+/tips/__pycache__
+/data_generation/__pycache__
+dev/11_titanic/data/test.csv
+dev/11_titanic/submission_random_forest.csv
+dev/11_titanic/submission.csv
+dev/11_titanic/data/gender_submission.csv
+dev/11_titanic/data/train.csv
+dev/11_titanic/titanic.zip
