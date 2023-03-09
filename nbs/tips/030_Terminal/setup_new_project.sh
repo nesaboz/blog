@@ -41,3 +41,10 @@ jupyter notebook --generate-config
 echo "Change the default kernel by modifying and uncommenting in jupyter config file following line:  c.MultiKernelManager.default_kernel_name='newDefault' \n"
 echo "Add jupyter notebook extensions 'collapsable headings' and 'table of context 2' toc2"
 
+
+wget https://repo.anaconda.com/miniconda/Miniconda3-py310_23.1.0-1-Linux-x86_64.sh
+sudo bash Miniconda3-py310_23.1.0-1-Linux-x86_64.sh
+
+
+
+
