@@ -8,6 +8,7 @@ website:
       - section: Mini-projects
         file: mini-projects.ipynb
         contents:
+          - mini-projects/13_fastbook_chapter_5_image_classification/13_fastbook_chapter_5_image_classification.ipynb
           - mini-projects/10_kubernets/10_kubernets.ipynb
           - mini-projects/09_bear_classifier/09_bear_classifier.ipynb
           - mini-projects/08_labeling.ipynb
