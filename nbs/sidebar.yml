@@ -65,6 +65,7 @@ website:
           - section: Misc
             contents:
               - tips/060_Misc/Git.ipynb
+              - tips/060_Misc/paperspace.ipynb
               - tips/060_Misc/JarvisLabsai.ipynb
               - tips/060_Misc/Latex.ipynb
               - tips/060_Misc/MacOS.ipynb
