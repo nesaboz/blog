@@ -8,6 +8,7 @@ website:
       - section: Mini-projects
         file: mini-projects.ipynb
         contents:
+          - mini-projects/15_head_pose/15_head_pose.ipynb
           - mini-projects/14_multi_label_classification/14_multi_label_classification.ipynb
           - mini-projects/13_fastbook_chapter_5_image_classification/13_fastbook_chapter_5_image_classification.ipynb
           - mini-projects/10_kubernets/10_kubernets.ipynb
