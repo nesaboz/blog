@@ -36,7 +36,7 @@ git clone $remote_name
 #git config --global init.defaultBranch main
 #git init
 
-pip install fastai==2.7.10 jupyter-lab numpy pandas matplotlib torchviz scikit-learn tensorboard torchvision torch tqdm torch-lr-finder ipyplot ipywidgets opencv-python torchmetrics
+pip install fastai==2.7.10 jupyterlab numpy pandas matplotlib torchviz scikit-learn tensorboard torchvision torch tqdm torch-lr-finder ipyplot ipywidgets opencv-python torchmetrics
 yes | conda install -c conda-forge jupyter_contrib_nbextensions graphviz python-graphviz
 
 ipython kernel install --name $repo_name --user
