@@ -35,7 +35,8 @@ website:
               - tips/010_Python/PIL.ipynb
               - tips/010_Python/PyTest.ipynb
               - tips/010_Python/Regex.ipynb
-              - tips/010_Python/Scipy.ipynb
+              - tips/010_Python/Numpy.ipynb
+              - tips/010_Python/PyData.ipynb
               - tips/010_Python/SetOperations.ipynb
               - tips/010_Python/Visualizations.ipynb
               - tips/010_Python/General.ipynb
@@ -47,7 +48,7 @@ website:
               - tips/020_Jupyter/matplotlib.ipynb
           - section: Terminal
             contents:
-              - tips/030_Terminal/MakeNewRepo.ipynb
+              - tips/030_Terminal/SetUpEnv.ipynb
               - tips/030_Terminal/zsh.ipynb
           - section: PyTorch
             contents:
