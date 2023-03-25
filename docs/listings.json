@@ -1,0 +1,69 @@
+[
+  {
+    "listing": "/projects.html",
+    "items": [
+      "/projects/solar/solar.html"
+    ]
+  },
+  {
+    "listing": "/tips.html",
+    "items": [
+      "/tips/040_PyTorch/augmentations.html",
+      "/tips/050_FastAI/azure.html",
+      "/tips/040_PyTorch/convolutions.html",
+      "/tips/060_Misc/customdomain.html",
+      "/tips/010_Python/datetime.html",
+      "/tips/050_FastAI/fastai.html",
+      "/tips/010_Python/fileio.html",
+      "/tips/010_Python/functools.html",
+      "/tips/060_Misc/git.html",
+      "/tips/050_FastAI/huggingface.html",
+      "/tips/020_Jupyter/images.html",
+      "/tips/060_Misc/jarvislabsai.html",
+      "/tips/020_Jupyter/general.html",
+      "/tips/060_Misc/kaggle.html",
+      "/tips/020_Jupyter/kernels.html",
+      "/tips/060_Misc/latex.html",
+      "/tips/040_PyTorch/loss.html",
+      "/tips/060_Misc/macos.html",
+      "/tips/020_Jupyter/matplotlib.html",
+      "/tips/040_PyTorch/metrics.html",
+      "/tips/040_PyTorch/models.html",
+      "/tips/010_Python/numpy.html",
+      "/tips/010_Python/pil.html",
+      "/tips/060_Misc/paperspace.html",
+      "/tips/010_Python/pathlib.html",
+      "/tips/010_Python/pydata.html",
+      "/tips/010_Python/pytest.html",
+      "/tips/010_Python/general.html",
+      "/tips/010_Python/regex.html",
+      "/tips/010_Python/scipy.html",
+      "/tips/010_Python/setoperations.html",
+      "/tips/030_Terminal/setupenv.html",
+      "/tips/060_Misc/statistics.html",
+      "/tips/040_PyTorch/tensor.html",
+      "/tips/010_Python/visualizations.html",
+      "/tips/050_FastAI/nbdev.html",
+      "/tips/030_Terminal/zsh.html"
+    ]
+  },
+  {
+    "listing": "/mini-projects.html",
+    "items": [
+      "/mini-projects/15_head_pose/head_pose.html",
+      "/mini-projects/14_multi_label_classification/multi_label_classification.html",
+      "/mini-projects/13_fastbook_chapter_5_image_classification/fastbook_chapter_5_image_classification.html",
+      "/mini-projects/10_kubernets/kubernets.html",
+      "/mini-projects/09_bear_classifier/bear_classifier.html",
+      "/mini-projects/labeling.html",
+      "/mini-projects/transfer_learning.html",
+      "/mini-projects/rock_paper_scissors.html",
+      "/mini-projects/multiclass_image_classification.html",
+      "/mini-projects/2_torchvision_conversions_samplers.html",
+      "/mini-projects/1_binary_image_classification.html",
+      "/mini-projects/binary_classification.html",
+      "/mini-projects/quadratic_function_fit.html",
+      "/mini-projects/linear_regression.html"
+    ]
+  }
+]
