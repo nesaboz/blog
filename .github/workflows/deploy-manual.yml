@@ -18,9 +18,9 @@ jobs:
         uses: quarto-dev/quarto-actions/setup@v2
 
       - name: Render and Publish
+        working-directory: ./nbs  # Replace 'your-subdirectory' with the actual subdirectory name
         uses: quarto-dev/quarto-actions/publish@v2
         with:
           target: gh-pages
-          source_dir: nbs   # Replace 'your-subdirectory' with the actual subdirectory name
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
