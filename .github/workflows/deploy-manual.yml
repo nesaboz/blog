@@ -1,28 +1,26 @@
-name: Deploy
 on:
+  workflow_dispatch:
   push:
-    branches:
-      - main  # Change this to the branch where your project files are located
+    branches: main
+
+name: Quarto Publish
 
 jobs:
-  deploy:
+  build-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-    - name: Check out repo
-      uses: actions/checkout@v2
+      - name: Check out repository
+        uses: actions/checkout@v2
 
-    - name: Set up Quarto
-      run: |
-        curl -sSL https://install.quarto.org | bash
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
 
-    - name: Add Quarto to PATH
-      run: |
-        echo "PATH=$HOME/.quarto/bin:$PATH" >> $GITHUB_ENV
-
-    - name: Build and Deploy
-      working-directory: ./nbs  # Replace 'your-subdirectory' with the actual subdirectory name
-      run: |
-        git config --global user.email "quarto-github-actions-publish@example.com"
-        git config --global user.name "Quarto Publish"
-        quarto build
-        quarto publish
+      - name: Render and Publish
+        uses: quarto-dev/quarto-actions/publish@v2
+        with:
+          target: gh-pages
+          source_dir: nbs   # Replace 'your-subdirectory' with the actual subdirectory name
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
