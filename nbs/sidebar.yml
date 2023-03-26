@@ -73,6 +73,7 @@ website:
               - tips/060_Misc/MacOS.ipynb
               - tips/060_Misc/CustomDomain.ipynb
               - tips/060_Misc/kaggle.ipynb
+              - tips/060_Misc/statistics.ipynb
       - media.ipynb
       - about.qmd
 
