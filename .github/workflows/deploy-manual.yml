@@ -18,6 +18,7 @@ jobs:
     - name: Add Quarto to PATH
       run: |
         echo "$HOME/.quarto/bin" >> $GITHUB_PATH
+        echo "$HOME/.quarto/bin" >> $GITHUB_ENV
 
     - name: Build and Deploy
       working-directory: ./nbs  # Replace 'your-subdirectory' with the actual subdirectory name
