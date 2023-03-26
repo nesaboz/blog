@@ -7,6 +7,9 @@ format:
     css: styles.css
     toc: true
 
+execute:
+  freeze: auto
+  
 website:
   twitter-card: true
   open-graph: true
