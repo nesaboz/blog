@@ -1,0 +1,31 @@
+# Import the necessary libraries
+import pandas as pd
+from mlxtend.frequent_patterns import apriori
+from mlxtend.frequent_patterns import association_rules
+import requests
+
+url = "https://archive.ics.uci.edu/ml/machine-learning-databases/00502/online_retail_II.xlsx"  # Replace with your dataset URL
+
+response = requests.get(url)
+
+if response.status_code == 200:
+    with open("online_retail_II.xlsx", "wb") as f:
+        f.write(response.content)
+else:
+    print("Failed to download dataset")
+
+
+# Load the dataset
+data = pd.read_excel('online_retail_II.xlsx', header=None)
+
+# Convert the dataset to a one-hot encoded format
+one_hot_data = pd.get_dummies(data)
+
+# Perform association rule mining using the Apriori algorithm
+frequent_itemsets = apriori(one_hot_data, min_support=0.01, use_colnames=True)
+
+# Generate association rules from the frequent itemsets
+rules = association_rules(frequent_itemsets, metric='lift', min_threshold=1)
+
+# Print the top 10 rules sorted by lift
+print(rules.sort_values('lift', ascending=False).head(10))
