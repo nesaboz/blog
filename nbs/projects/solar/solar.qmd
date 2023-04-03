@@ -5,6 +5,7 @@ toc: true
 image:  solar.png
 tags: [technical]
 ---
+![](midjourney_solar_panels_in_the_desert.png)
 
 # Solar
 > Detecting solar panels from satellite images ([github](https://github.com/nesaboz/solar))
@@ -14,10 +15,9 @@ using satellite images. Due to large varieties of the images, I decided to use d
 
 # Data 
 
-Data preparation/cleaning was intensive. Most labels were provided thought quality was not ideal. Nevertheless, 
-I am grateful for what seems to have been a painful labeling job. I also generated some labels 
+Images of solar farms were obtained using Airbus Defence and Space satelites. Data preparation and cleaning was intensive. Most labels were provided though quality was not ideal (nonetheless I am grateful for what seems to have been a painful labeling job). I generated dozens of additional labels 
 using [LabelMe](https://github.com/wkentaro/labelme). 
-I first split several large (~1GB) satellite images into smaller ones (256x256 size). 
+The large (~1GB) satellite images were split into smaller ones (256x256 pixels size). 
 There were 449 labels of 3 classes: racks, common panels, and dense panels:
 
 ![label1.png](assets/label1.png)
