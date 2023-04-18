@@ -37,6 +37,7 @@ website:
               - tips/010_Python/Regex.ipynb
               - tips/010_Python/Numpy.ipynb
               - tips/010_Python/PyData.ipynb
+              - tips/010_Python/copy_and_deepcopy.ipynb
               - tips/010_Python/SetOperations.ipynb
               - tips/010_Python/Visualizations.ipynb
               - tips/010_Python/General.ipynb
