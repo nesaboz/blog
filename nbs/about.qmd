@@ -1,7 +1,7 @@
 ---
 title: "About me"
 about:
-  template: jolla
+  template: solana
   image: assets/mugshot.jpg
   links:
     - icon: twitter
@@ -12,7 +12,6 @@ about:
       href: https://github.com
 comments: false
 ---
-
 I'm a software engineer with PhD in Electrical Engineering. I've published
 Science Journal paper with 2500+ citations,
 patented instrument software that enabled COVID-19 antibody
@@ -22,6 +21,6 @@ ocean. I'm passionate about machine learning,
 innovation, and great teams.
 
 When not messing with code, I arm-wrestle with my 3-year old twins, do yoga,
-mountain bike, ski, and hone my darts' skills.
+mountain bike, ski, and hone my darts skills.
 
 [email me](mailto:nesaboz@gmail.com)

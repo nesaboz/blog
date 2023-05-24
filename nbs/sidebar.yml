@@ -59,6 +59,7 @@ website:
               - tips/040_PyTorch/metrics.ipynb
               - tips/040_PyTorch/Models.ipynb
               - tips/040_PyTorch/Tensor.ipynb
+              - tips/040_PyTorch/backprop.ipynb
           - section: FastAI
             contents:
               - tips/050_FastAI/Azure.ipynb
