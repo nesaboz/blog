@@ -5,6 +5,7 @@ website:
         file: projects.ipynb
         contents:
           - projects/solar/solar.qmd
+          - projects/spacenet8/spacenet8.qmd
       - section: Mini-projects
         file: mini-projects.ipynb
         contents:

@@ -5,9 +5,15 @@ toc: true
 image:  solar.png
 tags: [technical]
 ---
-![](midjourney_solar_panels_in_the_desert.png)
 
-# Solar
+<center>
+    <figure>
+    <img width="500" src="midjourney_solar_panels_in_the_desert.png"/>
+    </figure>
+</center>
+
+
+# Solar panel segmentation
 > Detecting solar panels from satellite images ([github](https://github.com/nesaboz/solar))
 
 Goal of this project is to deliver segmentation masks of solar panel farms 
