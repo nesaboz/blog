@@ -74,7 +74,7 @@ website:
               - tips/060_Misc/paperspace.ipynb
               - tips/060_Misc/JarvisLabsai.ipynb
               - tips/060_Misc/Latex.ipynb
-              - tips/060_Misc/MacOS.ipynb
+              - tips/060_Misc/OS.ipynb
               - tips/060_Misc/CustomDomain.ipynb
               - tips/060_Misc/kaggle.ipynb
               - tips/060_Misc/statistics.ipynb
