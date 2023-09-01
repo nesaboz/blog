@@ -43,6 +43,12 @@ website:
               - tips/010_Python/SetOperations.ipynb
               - tips/010_Python/Visualizations.ipynb
               - tips/010_Python/General.ipynb
+          - section: Cloud
+            contents:
+              - tips/015_Cloud/Docker.md
+              - tips/015_Cloud/paperspace.ipynb
+              - tips/015_Cloud/aws_sagemaker.ipynb
+              - tips/015_Cloud/JarvisLabsai.ipynb
           - section: Jupyter
             contents:
               - tips/020_Jupyter/Images.ipynb
@@ -71,8 +77,6 @@ website:
           - section: Misc
             contents:
               - tips/060_Misc/Git.ipynb
-              - tips/060_Misc/paperspace.ipynb
-              - tips/060_Misc/JarvisLabsai.ipynb
               - tips/060_Misc/Latex.ipynb
               - tips/060_Misc/OS.ipynb
               - tips/060_Misc/CustomDomain.ipynb
