@@ -5,7 +5,6 @@
 
 Hi there and welcome to my website! Here you will find my work on deep
 learning [projects](projects.ipynb) and some [smaller
-projects](mini-projects.ipynb) too. You can browse some [publications,
-patents and media covers](media.ipnb) of my work, and some general
+projects](mini-projects.ipynb) too. You can browse some [publications patents and media covers](media.ipynb) of my work, and some general
 software [tips](tips.ipynb) I accumulated over time. Feel free to
 [contact me](about.qmd) if you have any questions. Enjoy!
