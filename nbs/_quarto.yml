@@ -30,7 +30,6 @@ website:
         file: tips.ipynb
       - text: Media
         file: media.ipynb
-      - about.qmd
     right:
       - icon: github
         href: https://github.com/nesaboz
