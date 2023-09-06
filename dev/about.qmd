@@ -1,7 +1,7 @@
 ---
 title: "About me"
 about:
-  template: solana
+  template: jolla
   image: assets/mugshot.jpg
   links:
     - icon: twitter
@@ -12,6 +12,7 @@ about:
       href: https://github.com
 comments: false
 ---
+
 I'm a software engineer with PhD in Electrical Engineering. I've published
 Science Journal paper with 2500+ citations,
 patented instrument software that enabled COVID-19 antibody
