@@ -47,7 +47,7 @@ website:
             contents:
               - tips/015_Cloud/docker.ipynb
               - tips/015_Cloud/paperspace.ipynb
-              - tips/015_Cloud/aws_sagemaker.ipynb
+              - tips/015_Cloud/aws.ipynb
               - tips/015_Cloud/JarvisLabsai.ipynb
           - section: Jupyter
             contents:
