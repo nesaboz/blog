@@ -12,7 +12,7 @@ nbs/mini-projects/runs/
 dev/19_darts/images/
 
 /nbs/mini-projects/09_bear_classifier/bear_images
-/nbs/mini-projects/10_kubernets/usercode/config
+/nbs/mini-projects/10_kubernetes/usercode/config
 /nbs/dev/11_titanic/data
 dev/11_titanic/data/test.csv
 dev/11_titanic/submission_random_forest.csv
@@ -23,3 +23,5 @@ dev/11_titanic/titanic.zip
 nbs/mini-projects/pera.pth
 nbs/mini-projects/rps-test-set.zip
 nbs/mini-projects/rps.zip
+
+blog.egg-info/

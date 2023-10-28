@@ -9,11 +9,9 @@ website:
       - section: Mini-projects
         file: mini-projects.ipynb
         contents:
-          - mini-projects/17_feature_engineering/17_feature_engineering.ipynb
           - mini-projects/15_head_pose/15_head_pose.ipynb
           - mini-projects/14_multi_label_classification/14_multi_label_classification.ipynb
           - mini-projects/13_fastbook_chapter_5_image_classification/13_fastbook_chapter_5_image_classification.ipynb
-          - mini-projects/10_kubernets/10_kubernets.ipynb
           - mini-projects/09_bear_classifier/09_bear_classifier.ipynb
           - mini-projects/08_labeling.ipynb
           - mini-projects/07_transfer_learning.ipynb
@@ -22,12 +20,32 @@ website:
           - mini-projects/04_2_torchvision_conversions_samplers.ipynb
           - mini-projects/04_1_binary_image_classification.ipynb
           - mini-projects/03_binary_classification.ipynb
+          - mini-projects/17_feature_engineering/17_feature_engineering.ipynb
           - mini-projects/02_quadratic_function_fit.ipynb
           - mini-projects/01_linear_regression.ipynb
-
       - section: Tips
         file: tips.ipynb
         contents:
+          - section: Cloud
+            contents:
+              - tips/015_Cloud/docker.ipynb
+              - tips/015_Cloud/paperspace.ipynb
+              - tips/015_Cloud/aws.ipynb
+              - tips/015_Cloud/JarvisLabsai.ipynb
+              - tips/015_Cloud/kubernetes/kubernetes.ipynb
+          - section: Terminal
+            contents:
+              - tips/030_Terminal/Environments.ipynb
+              - tips/030_Terminal/zsh.ipynb
+          - section: PyTorch
+            contents:
+              - tips/040_PyTorch/Augmentations.ipynb
+              - tips/040_PyTorch/convolutions.ipynb
+              - tips/040_PyTorch/loss.ipynb
+              - tips/040_PyTorch/metrics.ipynb
+              - tips/040_PyTorch/Models.ipynb
+              - tips/040_PyTorch/Tensor.ipynb
+              - tips/040_PyTorch/backprop.ipynb
           - section: Python
             contents:
               - tips/010_Python/Datetime.ipynb
@@ -43,31 +61,12 @@ website:
               - tips/010_Python/SetOperations.ipynb
               - tips/010_Python/Visualizations.ipynb
               - tips/010_Python/General.ipynb
-          - section: Cloud
-            contents:
-              - tips/015_Cloud/docker.ipynb
-              - tips/015_Cloud/paperspace.ipynb
-              - tips/015_Cloud/aws.ipynb
-              - tips/015_Cloud/JarvisLabsai.ipynb
           - section: Jupyter
             contents:
               - tips/020_Jupyter/Images.ipynb
               - tips/020_Jupyter/Kernels.ipynb
               - tips/020_Jupyter/General.ipynb
               - tips/020_Jupyter/matplotlib.ipynb
-          - section: Terminal
-            contents:
-              - tips/030_Terminal/SetUpEnv.ipynb
-              - tips/030_Terminal/zsh.ipynb
-          - section: PyTorch
-            contents:
-              - tips/040_PyTorch/Augmentations.ipynb
-              - tips/040_PyTorch/convolutions.ipynb
-              - tips/040_PyTorch/loss.ipynb
-              - tips/040_PyTorch/metrics.ipynb
-              - tips/040_PyTorch/Models.ipynb
-              - tips/040_PyTorch/Tensor.ipynb
-              - tips/040_PyTorch/backprop.ipynb
           - section: FastAI
             contents:
               - tips/050_FastAI/Azure.ipynb
@@ -83,5 +82,3 @@ website:
               - tips/060_Misc/kaggle.ipynb
               - tips/060_Misc/statistics.ipynb
               - tips/060_Misc/wsl.ipynb
-      - media.ipynb
-
