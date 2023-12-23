@@ -17,6 +17,7 @@ website:
   favicon: favicon.ico
   sidebar:
     style: docked
+    collapse-level: 3
   navbar:
     background: primary
     search: true
