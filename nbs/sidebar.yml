@@ -34,6 +34,7 @@ website:
               - tips/015_Cloud/aws/21_aws_rds_ec2_sqs.ipynb
               - tips/015_Cloud/aws/25_aws_sns.ipynb
               - tips/015_Cloud/aws/26_host_static_website.ipynb
+              - tips/015_Cloud/aws/autoscaling.ipynb
               - tips/015_Cloud/JarvisLabsai.ipynb
               - tips/015_Cloud/kubernetes/kubernetes.ipynb
           - section: Terminal
