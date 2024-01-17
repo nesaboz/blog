@@ -30,11 +30,14 @@ website:
             contents:
               - tips/015_Cloud/docker.ipynb
               - tips/015_Cloud/paperspace.ipynb
-              - tips/015_Cloud/aws/aws.ipynb
-              - tips/015_Cloud/aws/21_aws_rds_ec2_sqs.ipynb
-              - tips/015_Cloud/aws/25_aws_sns.ipynb
-              - tips/015_Cloud/aws/26_host_static_website.ipynb
-              - tips/015_Cloud/aws/autoscaling.ipynb
+              - tips/015_Cloud/aws/aws_basics.ipynb
+              - tips/015_Cloud/aws/ec2_cli.ipynb
+              - tips/015_Cloud/aws/ec2_image_builder.ipynb
+              - tips/015_Cloud/aws/ec2_autoscaling.ipynb
+              - tips/015_Cloud/aws/lambda.ipynb
+              - tips/015_Cloud/aws/queues.ipynb
+              - tips/015_Cloud/aws/host_static_website.ipynb
+              - tips/015_Cloud/aws/aws_rds.ipynb
               - tips/015_Cloud/JarvisLabsai.ipynb
               - tips/015_Cloud/kubernetes/kubernetes.ipynb
           - section: Terminal
