@@ -35,8 +35,6 @@ def send_message():
     st.session_state['input_text'] = ''
     
 
-
-
 def show_with_background_color(some_text):
 
     # Inject custom CSS with st.markdown
@@ -67,9 +65,9 @@ if st.session_state['number_of_trials'] == 0:
 
 
 # Streamlit app layout
-st.title("MyGPT")
+st.title("MyGPT Demo")
 
-st.info(f"Welcome to MyGPT, a simple GPT-4 based chatbot. Since this is a demo, you can only ask {st.session_state['number_of_trials']} question and there is a max of about 200 words). No questions or answers are stored whatsoever.")
+st.info(f"Welcome to MyGPT, a simple GPT-4 based chatbot. No questions or answers are stored whatsoever. Response are limited to about 300 words. ")
 
 for i in range(1, len(st.session_state['chat'] ), 2):
     a1 = st.write(st.session_state['chat'][i]['content'])

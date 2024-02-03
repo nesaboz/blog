@@ -4,6 +4,7 @@ website:
       - section: Projects
         file: projects.ipynb
         contents:
+          - projects/myGPT/myGPT.ipynb
           - projects/spacenet8/spacenet8.qmd
           - projects/solar/solar.qmd
       - section: Mini-projects
@@ -32,6 +33,7 @@ website:
               - tips/015_Cloud/docker.ipynb
               - tips/015_Cloud/paperspace.ipynb
               - tips/015_Cloud/aws/aws_basics.ipynb
+              - tips/015_Cloud/aws/host_web_app.ipynb
               - tips/015_Cloud/aws/ec2_cli.ipynb
               - tips/015_Cloud/aws/ec2_image_builder.ipynb
               - tips/015_Cloud/aws/ec2_autoscaling.ipynb
