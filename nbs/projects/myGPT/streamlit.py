@@ -59,9 +59,9 @@ if 'first time' not in st.session_state:
     {'role': 'system', 'content': 'You are software engineer'}
     ]
 
-if st.session_state['number_of_trials'] == 0:
-    st.info("You have no more questions left. Thanks for trying MyGPT.")
-    st.stop()
+# if st.session_state['number_of_trials'] == -1:
+#     st.info("You have no more questions left. Thanks for trying MyGPT.")
+#     st.stop()
 
 
 # Streamlit app layout
@@ -78,15 +78,17 @@ for i in range(1, len(st.session_state['chat'] ), 2):
 st.info(f"Number of questions left: {st.session_state['number_of_trials']}")
     
     
-# Using columns to organize the layout
-col1, col2 = st.columns([4, 1]) 
-# 'content': 'What is most popular programming language today?'}]
+if st.session_state['number_of_trials'] > 0:
 
-with col1:
-    user_input = st.text_input(label="user input", value="", key=text_input_key, placeholder="Enter a question", label_visibility="collapsed")
+    # Using columns to organize the layout
+    col1, col2 = st.columns([4, 1]) 
+    # 'content': 'What is most popular programming language today?'}]
 
-# Send button in the second column
-with col2:
-    send_button = st.button("Send", on_click=send_message)
-    
-# "debug", st.session_state['chat']
+    with col1:
+        user_input = st.text_input(label="user input", value="", key=text_input_key, placeholder="Enter a question", label_visibility="collapsed")
+
+    # Send button in the second column
+    with col2:
+        send_button = st.button("Send", on_click=send_message)
+        
+    # "debug", st.session_state['chat']
