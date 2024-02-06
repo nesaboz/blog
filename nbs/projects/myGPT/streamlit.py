@@ -6,14 +6,7 @@ text_input_key = "user_input"
 
 # Function to send requests to your GPT model
 def query_mygpt(chat):
-    # Replace this URL with the endpoint of your GPT model's API
-    # let's take a chat and append a response to it,
-    # for start let's just repeat the question
-    
-    # response = chat[-1]['content']    # todo: this will be replaced
-    # chat.append({'role': 'assistant', 'content': response})
-    # return response
-    
+
     lambda_url = "https://5faukxw75uazcs2zdl4zbvyg2e0lebie.lambda-url.us-west-1.on.aws/"
     # print("Please wait while GPT4 is done ...")
     headers = {'Content-Type': 'application/json'}
@@ -56,26 +49,17 @@ if 'first time' not in st.session_state:
     st.session_state['first time'] = False
     st.session_state['input_text'] = ''
     st.session_state['chat'] = [
-    {'role': 'system', 'content': 'You are software engineer'}
+    {'role': 'system', 'content': 'You are a software engineer'}
     ]
-
-# if st.session_state['number_of_trials'] == -1:
-#     st.info("You have no more questions left. Thanks for trying MyGPT.")
-#     st.stop()
-
-
 # Streamlit app layout
 st.title("MyGPT Demo")
 
-st.info(f"Welcome to MyGPT, a simple GPT-4 based chatbot. No questions or answers are stored whatsoever. Response are limited to about 300 words. ")
+st.info(f"Welcome to MyGPT, a simple GPT-4 based chatbot. No chats are stored. Response are limited to about 300 words. ")
 
 for i in range(1, len(st.session_state['chat'] ), 2):
     a1 = st.write(st.session_state['chat'][i]['content'])
     a2 = show_with_background_color(st.session_state['chat'][i+1]['content'])
     st.text("\n" * 10) 
-    
-
-st.info(f"Number of questions left: {st.session_state['number_of_trials']}")
     
     
 if st.session_state['number_of_trials'] > 0:
@@ -92,3 +76,5 @@ if st.session_state['number_of_trials'] > 0:
         send_button = st.button("Send", on_click=send_message)
         
     # "debug", st.session_state['chat']
+else:
+    st.info(f"This demo allows only 3 API calls. Thanks for trying it out. No chats are stored.")
