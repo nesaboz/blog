@@ -4,7 +4,7 @@ website:
       - section: Projects
         file: projects.ipynb
         contents:
-          - projects/myGPT/myGPT.ipynb
+          - projects/myGPT/myGPT.qmd
           - projects/spacenet8/spacenet8.qmd
           - projects/solar/solar.qmd
       - section: Mini-projects
@@ -41,6 +41,8 @@ website:
               - tips/015_Cloud/aws/glue.ipynb
               - tips/015_Cloud/aws/application_integration.ipynb
               - tips/015_Cloud/aws/host_static_website.ipynb
+              - tips/015_Cloud/aws/host_web_app.ipynb
+              - tips/015_Cloud/github_actions.ipynb
               - tips/015_Cloud/aws/aws_rds.ipynb
               - tips/015_Cloud/JarvisLabsai.ipynb
               - tips/015_Cloud/kubernetes/kubernetes.ipynb
