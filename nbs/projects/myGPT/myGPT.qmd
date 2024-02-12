@@ -7,7 +7,7 @@ image:  myGPT_thumbnail.jpg
 tags: [technical]
 ---
 
-A simple chatbot was developed based on OpenAI's GPT3 model. APIs were called by AWS Lambda, supporting both `requests` and `boto3` library calls. Web app was writen in Streamlit and hosted on custom EC2 instance. CI/CD was done using GitHub Actions. 
+A simple chatbot was developed based on OpenAI's GPT3 model. APIs were called by AWS Lambda, supporting both `requests` and `boto3` library calls. Web app was written in Streamlit and hosted on custom EC2 instance. CI/CD was done using GitHub Actions. 
 
 Try it yourself at <a href="https://nesaboz-chatbot-mygpt-cfgwpf.streamlit.app" target="_blank">MyGPT</a>.
 
