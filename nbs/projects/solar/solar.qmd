@@ -2,29 +2,25 @@
 author: Nenad Bozinovic
 date: 2023-01-17
 toc: true
-image:  solar.png
+title: Detecting solar panels from satellite images 
+image: solar.png
 tags: [technical]
 ---
 
 <center>
     <figure>
-    <img width="500" src="midjourney_solar_panels_in_the_desert.png"/>
+    <img width="300" src="midjourney_solar_panels_in_the_desert.png"/>
     </figure>
 </center>
 
+# Abstract
 
-# Solar panel segmentation
-> Detecting solar panels from satellite images ([github](https://github.com/nesaboz/solar))
-
-Goal of this project is to deliver segmentation masks of solar panel farms 
-using satellite images. Due to large varieties of the images, I decided to use deep segmentation/PyTorch. 
+This study leverages deep learning for segmenting solar panels in satellite imagery to enable tracking of installation process on large solar farms. Various augmentation techiques (ColorJitter) were evaluated to combat infuence of clouds and shadows in the images. A custom segmentation ResNet-based model was developed in PyTorch, to achieved 71% Jaccard index (aka IoU) on a validation dataset. [GitHub repo](https://github.com/nesaboz/solar).
 
 # Data 
 
-Images of solar farms were obtained using Airbus Defence and Space satelites. Data preparation and cleaning was intensive. Most labels were provided though quality was not ideal (nonetheless I am grateful for what seems to have been a painful labeling job). I generated dozens of additional labels 
-using [LabelMe](https://github.com/wkentaro/labelme). 
-The large (~1GB) satellite images were split into smaller ones (256x256 pixels size). 
-There were 449 labels of 3 classes: racks, common panels, and dense panels:
+Raw images of solar farms were provided using Airbus Defence and Space satelites, followed by manual labeling using [LabelMe](https://github.com/wkentaro/labelme) software.
+The large (~1GB) satellite images were split into smaller ones (256x256 pixels size), and total of 449 labels of 3 classes: racks, common panels, and dense panels were obtained.
 
 ![label1.png](assets/label1.png)
 ![label2.png](assets/label2.png)

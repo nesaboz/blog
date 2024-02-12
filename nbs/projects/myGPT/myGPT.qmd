@@ -2,25 +2,20 @@
 author: Nenad Bozinovic
 date: 2024-02-08
 toc: true
+title: Chatbot based on OpenAI's GPT3
 image:  myGPT_thumbnail.jpg
 tags: [technical]
 ---
 
-<center>
-    <figure>
-    <img width="500" src="myGPT_thumbnail.jpg"/>
-    </figure>
-</center>
+A simple chatbot was developed based on OpenAI's GPT3 model. APIs were called by AWS Lambda, supporting both `requests` and `boto3` library calls. Web app was writen in Streamlit and hosted on custom EC2 instance. CI/CD was done using GitHub Actions. Repo details at [GitHub link](https://github.com/nesaboz/chatbot/).
 
+Try it yourself at <a href="https://nesaboz-chatbot-mygpt-cfgwpf.streamlit.app" target="_blank">MyGPT</a>.
 
-Welcome to MyGPT, a simple demo of how to use OpenAI's GPT-4 API.
-Try it for yourself at <a href="https://nesaboz-chatbot-mygpt-cfgwpf.streamlit.app" target="_blank">MyGPT</a>.
-Details as [GitHub link](https://github.com/nesaboz/chatbot/).
+# Demo
 
+[demo](demo_2x.m4v)
 
-The design decisions were to use Streamlit for the web app, it is interactive (and WebSocket based) what is for a chat. I use AWS Lambda to call the OpenAI API and the web app is hosted on an EC2 instance (for now). Automatic deployment is done using GitHub Actions.
-
-Some notable techincal points:
+# Notable technical points
 
 1. OpenAI interface is via client and API key (pip library is [`openai`](https://pypi.org/project/openai/))
 
@@ -91,10 +86,6 @@ def lambda_handler(event, context):
     }
 ```
 
-## Conclusion
+# Conclusion
 
-We have shown two approaches to call OpenAI API. We can now make a webpage out of this so we can repeatedly call the Lambda function and get the response back.
-
-I have written short [streamlit](https://github.com/nesaboz/chatbot) code for this. 
-
-I have sucesfully hosted the app on both `streamlit.app` platform and my own EC2 instance, it is however not worth using the resources just for the demo. If this is to scale the proper way I would use AWS Beanstalk that takes care of load balancers and autoscaling web servers.
+We have shown two approaches to call OpenAI API hosted on AWS Lambda using `requests` and `boto3` python libraries. I've hosted the app on both `streamlit.app` web platform and my own EC2 instance, however, it is not worth using the resources just for the demo. If this is to scale the proper way I would use AWS Beanstalk that takes care of load balancers and autoscaling web servers.

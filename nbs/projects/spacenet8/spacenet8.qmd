@@ -1,12 +1,10 @@
 ---
-author: Nenad Bozinovic
+author: Nenad Bozinovic, Adrian Stoll, Naijing Guo
 date: 2023-06-18
 toc: true
-title: SpaceNet8
+title: Comparing Transformers and CNNs on the SpaceNet8 Flood Detection Challenge
 tags: [technical]
 ---
-
-# Comparing Transformers and CNNs on the SpaceNet8 Flood Detection Challenge
 
 This project was done for CS231n: Deep Learning for Computer Vision at Stanford University.
 
