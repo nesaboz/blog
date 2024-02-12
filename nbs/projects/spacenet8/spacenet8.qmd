@@ -6,21 +6,24 @@ title: Comparing Transformers and CNNs on the SpaceNet8 Flood Detection Challeng
 tags: [technical]
 ---
 
-This project was done for CS231n: Deep Learning for Computer Vision at Stanford University.
-
-Equal contributions from: \
-Adrian Stoll ([@AdrS](https://github.com/adrs)), Naijing Guo ([@NaijingGuo](https://github.com/naijingguo)), and Nenad Bozinovic ([@nesaboz](https://github.com/nesaboz)).
-
-[**Report**](https://github.com/nesaboz/SpaceNet8/blob/main/SpaceNet8_final_paper.pdf) and [**poster**](https://github.com/nesaboz/SpaceNet8/blob/main/SpaceNet8_final_poster.pdf).
-
-Acknowledgement: Large chunks of code are taken from SpaceNet8 [repo](https://github.com/SpaceNetChallenge/SpaceNet8). Refer to the project report for our contributions.
-
-
 ## Abstract
 
 This project explores the SpaceNet8 Challenge, which aims to detect floods caused by hurricanes and heavy rains. We compared a variety of transformer and CNN segmentation architectures. We found that large pre-trained Segformer models had better performance than Resnet, DenseNet and EfficientNet based models despite consuming more computational resources. The highest IoU for building detection was 61% for Segformer, which indicated that attention is better suited for detecting building-footprints than convolutions. We noticed that flooded road detection was particularly hard with highest IoU of 40%. We observed pre-training on ImageNet and Cityscapes datasets provided a moderate improvement compared to pre-training on the ADE20k dataset and a significant improvement compared to training a model from scratch.
 
-# Dataset
+
+Equal contributions from: Adrian Stoll ([@AdrS](https://github.com/adrs)), Naijing Guo ([@NaijingGuo](https://github.com/naijingguo)), and Nenad Bozinovic ([@nesaboz](https://github.com/nesaboz)). This project was done for CS231n: Deep Learning for Computer Vision at Stanford University.
+
+[**Report**](https://github.com/nesaboz/SpaceNet8/blob/main/SpaceNet8_final_paper.pdf) and [**poster**](https://github.com/nesaboz/SpaceNet8/blob/main/SpaceNet8_final_poster.pdf). 
+<p align="left">
+  <a href="https://github.com/nesaboz/SpaceNet8">
+    <img src="https://badgen.net/badge/icon/GitHub?icon=github&label" alt="Repo">
+  </a>
+</p>
+
+Acknowledgement: SpaceNet8 [repo](https://github.com/SpaceNetChallenge/SpaceNet8).
+
+
+## Dataset
 
 <center>
     <figure>
@@ -30,7 +33,7 @@ This project explores the SpaceNet8 Challenge, which aims to detect floods cause
 
 Examples of SpaceNet8 raw images pre- and post-event (top row) and respective ground truth segmentation masks (bottom row)[1]. Colors indicate classes (buildings, road, flooded buildings and flooded roads). In this example blue and yellow colors refer to flooded buildings and roads. For pre-event labels there is 1 building class and 8 road classes denoting speed (10 mph per class). For post event there are 4 classes (non-flooded building, flooded building, flooded road, non-flooded road). Dataset was imbalanced and favored non-flooded areas (~85% of labels). We performed a split of 679 training images and 122 (15%) validation ones (used for all experiments).
 
-# Model Architecture
+## Model Architecture
 
 <center>
     <figure>
@@ -41,7 +44,7 @@ Examples of SpaceNet8 raw images pre- and post-event (top row) and respective gr
 
 Pipeline provided by SpaceNet8 containing foundation features network and flood attribution networks. The pipeline design is modular and allows different backbone models to be swapped in while maintaining the same data-loading, training, and evaluation code.
 
-# Experiments and Results
+## Experiments and Results
 
 We compared several backbones for Intersection over Union (IoU) metric. Each model was trained on the entire training set for typically 10 epochs (45 min on A6000) after which we would typically see validation loss convergence and overfitting on the training dataset. Each training run used the Adam optimizer with a learning rate of 0.0001. Loss functions were binary-cross-entropy (building detection), combined dice loss and focal loss (roads) and cross-entropy (flooded vs non flooded buildings and roads). 
 
@@ -63,7 +66,7 @@ Pre-training with ImageNet and Cityscapes datasets yields an improvement over AD
 We also did not see improvement by using larger CNN models (resnet 50, densenet161, efficientnet_b4) indicating that these models are overfitting on a relatively small SpaceNet8 dataset.
 
 
-# Resource analysis
+## Resource analysis
 
 Segformer b0 consumes more memory and has longer epoch durations that Resnet34 despite having fewer parameters. (Attention has quadratic time and space complexity in comparison to linear complexity for CNN models)
 
@@ -79,7 +82,7 @@ We noticed loading data from shared network drive increased epoch time 6-fold (~
 </center>
 
 
-# Conclusion
+## Conclusion
 
 Transformer models have better overall performance than CNN based models, although they are more resource demanding.
 
