@@ -7,24 +7,21 @@ website:
           - projects/myGPT/myGPT.qmd
           - projects/spacenet8/spacenet8.qmd
           - projects/solar/solar.qmd
-      - section: Mini-projects
-        file: mini-projects.ipynb
-        contents:
-          - mini-projects/openai/openai.ipynb
-          - mini-projects/15_head_pose/15_head_pose.ipynb
-          - mini-projects/14_multi_label_classification/14_multi_label_classification.ipynb
-          - mini-projects/13_fastbook_chapter_5_image_classification/13_fastbook_chapter_5_image_classification.ipynb
-          - mini-projects/09_bear_classifier/09_bear_classifier.ipynb
-          - mini-projects/08_labeling.ipynb
-          - mini-projects/07_transfer_learning.ipynb
-          - mini-projects/06_rock_paper_scissors.ipynb
-          - mini-projects/05_multiclass_image_classification.ipynb
-          - mini-projects/04_2_torchvision_conversions_samplers.ipynb
-          - mini-projects/04_1_binary_image_classification.ipynb
-          - mini-projects/03_binary_classification.ipynb
-          - mini-projects/17_feature_engineering/17_feature_engineering.ipynb
-          - mini-projects/02_quadratic_function_fit.ipynb
-          - mini-projects/01_linear_regression.ipynb
+          - projects/openai/openai.ipynb
+          - projects/15_head_pose/15_head_pose.ipynb
+          - projects/13_fastbook_chapter_5_image_classification/13_fastbook_chapter_5_image_classification.ipynb
+          - projects/09_bear_classifier/09_bear_classifier.ipynb
+          - projects/08_labeling.ipynb
+          - projects/14_multi_label_classification/14_multi_label_classification.ipynb
+          - projects/07_transfer_learning.ipynb
+          - projects/06_rock_paper_scissors.ipynb
+          - projects/05_multiclass_image_classification.ipynb
+          - projects/04_2_torchvision_conversions_samplers.ipynb
+          - projects/04_1_binary_image_classification.ipynb
+          - projects/03_binary_classification.ipynb
+          - projects/17_feature_engineering/17_feature_engineering.ipynb
+          - projects/02_quadratic_function_fit.ipynb
+          - projects/01_linear_regression.ipynb
       - section: Tips
         file: tips.ipynb
         contents:

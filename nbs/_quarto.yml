@@ -6,6 +6,8 @@ format:
     theme: cosmo
     css: styles.css
     toc: true
+    grid:
+      sidebar-width: 500px
 
 execute:
   freeze: auto
@@ -25,8 +27,6 @@ website:
     left:
       - text: Projects
         file: projects.ipynb
-      - text: Mini-projects
-        file: mini-projects.ipynb
       - text: Tips
         file: tips.ipynb
       - text: Media
