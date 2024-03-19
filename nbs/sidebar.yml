@@ -47,6 +47,11 @@ website:
             contents:
               - tips/030_Terminal/Environments.ipynb
               - tips/030_Terminal/zsh.ipynb
+          - section: Design Patterns
+            contents:
+              - tips/DesignPatterns/creational.ipynb
+              - tips/DesignPatterns/structural.ipynb
+              - tips/DesignPatterns/behavioral.ipynb
           - section: PyTorch
             contents:
               - tips/040_PyTorch/Augmentations.ipynb
