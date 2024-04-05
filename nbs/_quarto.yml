@@ -27,7 +27,7 @@ website:
     left:
       - text: Projects
         file: projects.ipynb
-      - text: Tips
+      - text: TILs
         file: tips.ipynb
       - text: Media
         file: media.ipynb

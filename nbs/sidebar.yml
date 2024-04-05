@@ -17,16 +17,14 @@ website:
           - projects/04_2_torchvision_conversions_samplers.ipynb
           - projects/04_1_binary_image_classification.ipynb
           - projects/03_binary_classification.ipynb
-          # - projects/17_feature_engineering/17_feature_engineering.ipynb
-          # - projects/02_quadratic_function_fit.ipynb
-          # - projects/01_linear_regression.ipynb
-      - section: Tips
+      - section: TILs
         file: tips.ipynb
         contents:
           - section: Cloud
             contents:
               - tips/015_Cloud/docker.ipynb
-              - tips/015_Cloud/paperspace.ipynb
+              - tips/015_Cloud/kubernetes/kubernetes.ipynb
+              - tips/015_Cloud/github_actions.ipynb
               - tips/015_Cloud/aws/aws_basics.ipynb
               - tips/015_Cloud/aws/ec2_cli.ipynb
               - tips/015_Cloud/aws/ec2_image_builder.ipynb
@@ -37,10 +35,9 @@ website:
               - tips/015_Cloud/aws/application_integration.ipynb
               - tips/015_Cloud/aws/host_static_website.ipynb
               - tips/015_Cloud/aws/host_web_app.ipynb
-              - tips/015_Cloud/github_actions.ipynb
               - tips/015_Cloud/aws/aws_rds.ipynb
-              - tips/015_Cloud/JarvisLabsai.ipynb
-              - tips/015_Cloud/kubernetes/kubernetes.ipynb
+              - tips/015_Cloud/paperspace.ipynb
+
           - section: Terminal
             contents:
               - tips/030_Terminal/Environments.ipynb
@@ -59,6 +56,9 @@ website:
               - tips/040_PyTorch/Models.ipynb
               - tips/040_PyTorch/Tensor.ipynb
               - tips/040_PyTorch/backprop.ipynb
+              - tips/040_PyTorch/feature_engineering.ipynb
+              - tips/040_PyTorch/quadratic_function_fit.ipynb
+              - tips/040_PyTorch/linear_regression.ipynb
           - section: Python
             contents:
               - tips/010_Python/Datetime.ipynb
