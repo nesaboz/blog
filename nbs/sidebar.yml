@@ -96,4 +96,5 @@ website:
               - tips/060_Misc/statistics.ipynb
               - tips/060_Misc/wsl.ipynb
               - tips/060_Misc/video.ipynb
-              - tips/08_labeling.ipynb
+              - tips/060_Misc/labeling.ipynb
+              - tips/060_Misc/pdf.ipynb
