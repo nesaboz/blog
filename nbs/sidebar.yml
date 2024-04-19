@@ -4,6 +4,7 @@ website:
       - section: Projects
         file: projects.ipynb
         contents:
+          - projects/hexagon-puzzle/hexagon-puzzle.ipynb
           - projects/spacenet8/spacenet8.qmd
           - projects/solar/solar.qmd
           - projects/openai/openai.ipynb

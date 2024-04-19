@@ -8,6 +8,7 @@ _docs/
 /**/.DS_Store
 /**/__pycache__
 .history/
+venv_blog
 
 dev/19_darts/images/
 dev/11_titanic/data/test.csv
