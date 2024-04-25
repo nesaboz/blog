@@ -1,4 +1,8 @@
 #!/bin/bash
+
+# I PREFER VENV THEN CONDA SO THIS IS KIND OF NOT RECOMMENDED
+
+
 # make sure this file has correct line endings for the system, in PyCharm go to File -> File Properties -> Line Separators
 # - go to github and create a new repo with name <repo_name>
 # - go to the PyCharmProject folder
