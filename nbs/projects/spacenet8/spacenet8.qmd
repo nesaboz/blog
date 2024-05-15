@@ -2,6 +2,7 @@
 author: Nenad Bozinovic, Adrian Stoll, Naijing Guo
 date: 2023-06-18
 toc: true
+image: https://raw.githubusercontent.com/nesaboz/SpaceNet8/main/paper/final-report/figures/dataset.png
 title: Comparing Transformers and CNNs on the SpaceNet8 Flood Detection Challenge
 tags: [technical]
 ---

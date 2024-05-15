@@ -4,10 +4,11 @@ website:
       - section: Projects
         file: projects.ipynb
         contents:
+          - projects/openai/openai.ipynb
+          - projects/caltrans/caltrans.qmd
           - projects/hexagon-puzzle/hexagon-puzzle.ipynb
           - projects/spacenet8/spacenet8.qmd
           - projects/solar/solar.qmd
-          - projects/openai/openai.ipynb
           - projects/15_head_pose/15_head_pose.ipynb
           - projects/13_fastbook_chapter_5_image_classification/13_fastbook_chapter_5_image_classification.ipynb
           - projects/09_bear_classifier/09_bear_classifier.ipynb
