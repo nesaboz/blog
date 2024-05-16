@@ -6,7 +6,7 @@ callout-appearance: simple
 toc-depth: 2
 toc: true
 date: 2024-05-15
-title: Data extraction using Regex
+title: Data extraction from PDFs
 description: I learned more about `regex` that I probably wanted to know
 tags: [technical]
 ---
