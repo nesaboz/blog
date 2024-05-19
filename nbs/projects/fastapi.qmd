@@ -6,7 +6,7 @@ callout-appearance: simple
 toc-depth: 2
 toc: true
 date: 2024-05-16
-title: API testing and monitoring
+title: REST API testing and monitoring
 description: FastAPI + Locust + Prometheus + Grafana = Killer combo
 tags: [technical]
 ---
@@ -18,9 +18,9 @@ tags: [technical]
 </p>
 
 
-I made a simple FastAPI project to test local SQLAlchemy Database APIs using Locust library. Performance metrics are stored long-term via Prometheus time-series database and monitored via Grafana. The whole thing was very easy to write and set up in a few hours (with big thanks to Docker compose too for this), and the setup is ready for production too.
+I made a simple FastAPI project to test REST APIs using Locust library. I used local SQLAlchemy Database crud APIs as an example. Performance metrics are stored long-term via Prometheus time-series database and monitored via Grafana. The whole thing was very easy to write and set up in a few hours (with big thanks to Docker compose too for this, and Educative.io for insights), and the setup is ready for production too.
 
-Screenshots of four webapps: FastAPI, Locust, Prometheus, and Grafana:
+Screenshots of four WebApp services: FastAPI, Locust, Prometheus, and Grafana:
 
 | ![Image 1](https://raw.githubusercontent.com/nesaboz/fastapi/main/assets/fastapi.png) | ![Image 2](https://raw.githubusercontent.com/nesaboz/fastapi/main/assets/locust.png) |
 |-------------------------------|-------------------------------|
