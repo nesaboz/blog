@@ -8,6 +8,8 @@ _docs/
 /**/.DS_Store
 /**/__pycache__
 .history/
+.vscode
+
 venv_blog
 
 dev/19_darts/images/

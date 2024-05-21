@@ -39,6 +39,7 @@ website:
               - tips/015_Cloud/aws/host_static_website.ipynb
               - tips/015_Cloud/aws/host_web_app.ipynb
               - tips/015_Cloud/aws/aws_rds.ipynb
+              - tips/015_Cloud/aws/step_functions.ipynb
               - tips/015_Cloud/paperspace.ipynb
 
           - section: Terminal

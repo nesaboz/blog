@@ -58,7 +58,7 @@ for name in "${(@k)aws_instances}"; do
     entry="Host $name
     HostName $public_ip
     User ubuntu
-    IdentityFile ~/.ssh/myonekey.pem
+    IdentityFile ~/.ssh/my-aws-key.pem
 "
 
     # Add new entry
