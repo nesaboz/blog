@@ -6,7 +6,7 @@ callout-appearance: simple
 toc-depth: 2
 toc: true
 date: 2024-05-16
-title: REST API testing and monitoring
+title: REST API stress testing
 description: FastAPI + Locust + Prometheus + Grafana = Killer combo
 tags: [technical]
 ---
