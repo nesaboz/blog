@@ -92,6 +92,7 @@ website:
               - tips/050_FastAI/nbdev.ipynb
           - section: Misc
             contents:
+              - tips/060_Misc/sql/sql.ipynb
               - tips/060_Misc/Git.ipynb
               - tips/060_Misc/Latex.ipynb
               - tips/060_Misc/OS.ipynb
