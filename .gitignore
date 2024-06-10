@@ -10,7 +10,7 @@ _docs/
 .history/
 .vscode
 
-venv_blog
+venv
 
 dev/19_darts/images/
 dev/11_titanic/data/test.csv

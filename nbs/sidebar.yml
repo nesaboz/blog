@@ -78,6 +78,7 @@ website:
               - tips/010_Python/SetOperations.ipynb
               - tips/010_Python/Visualizations.ipynb
               - tips/010_Python/General.ipynb
+              - tips/010_Python/parser_example.ipynb
           - section: Jupyter
             contents:
               - tips/020_Jupyter/Images.ipynb
