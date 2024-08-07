@@ -1,0 +1,17 @@
+/* 
+compile this file using:
+% protoc --python_out=. -I=. path/to/this/proto/file.proto
+*/
+ 
+message Race {
+  optional string title = 1;
+  optional Driver driver = 2;
+  optional int32 total_laps = 3 [default=60];
+  repeated double lap_times = 4 [packed=true];                                                                                                                                                   
+}
+ 
+message Driver {
+  optional string name = 1;
+  repeated string nicknames = 2;
+  optional int32 age = 3;
+}
