@@ -1,0 +1,13 @@
+syntax = "proto2";
+
+package vehicle;
+
+message Vehicle {
+  optional string id = 1;
+  enum Category {
+    UNKNOWN = 0;
+    CAR = 1;
+    BICYCLE = 2;
+  }
+  optional Category category = 2;
+}

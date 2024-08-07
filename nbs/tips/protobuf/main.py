@@ -1,4 +1,5 @@
 import race_pb2
+import vehicle_pb2
 
 # Function to add methods dynamically to a protobuf message
 def add_methods(cls):
@@ -19,6 +20,21 @@ add_methods(race_pb2.Race)
 
 print(race_pb2.Race.add_lap_time)
 
+print('-----')
+print(vehicle_pb2.Vehicle.UNKNOWN)
+print('-----')
+
+# Access the enum descriptor
+category_enum = vehicle_pb2.Vehicle.Category.DESCRIPTOR
+# List all enum values
+enum_values = {enum_value.name: enum_value.number for enum_value in category_enum.values}
+
+print("Vehicle Category Enum Values:")
+for name, value in enum_values.items():
+    print(f"{name}: {value}")
+    
+print('-----')
+
 # Example usage
 if __name__ == "__main__":
     driver = race_pb2.Driver(name="John Doe", nicknames=["Speedster", "The Flash"], age=30)
@@ -29,6 +45,10 @@ if __name__ == "__main__":
         driver=driver,
         total_laps=75,
         lap_times=[1.23, 1.45, 1.37, 1.50],
+        vehicle=vehicle_pb2.Vehicle(
+            id="123",
+            category=vehicle_pb2.Vehicle.CAR
+        )
     )
 
     race.add_lap_time(1.55)
