@@ -24,15 +24,19 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rvehicle.proto\x12\x07vehicle\"q\n\x07Vehicle\x12\n\n\x02id\x18\x01 \x01(\t\x12+\n\x08\x63\x61tegory\x18\x02 \x01(\x0e\x32\x19.vehicle.Vehicle.Category\"-\n\x08\x43\x61tegory\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x07\n\x03\x43\x41R\x10\x01\x12\x0b\n\x07\x42ICYCLE\x10\x02')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rvehicle.proto\x12\x07vehicle\"\xfc\x01\n\x07Vehicle\x12\n\n\x02id\x18\x01 \x01(\t\x12+\n\x08\x63\x61tegory\x18\x02 \x01(\x0e\x32\x19.vehicle.Vehicle.Category\x12*\n\x05specs\x18\x03 \x03(\x0b\x32\x1b.vehicle.Vehicle.SpecsEntry\x12\x12\n\x08us_model\x18\x04 \x01(\tH\x00\x12\x12\n\x08\x65u_model\x18\x05 \x01(\tH\x00\x1a,\n\nSpecsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"-\n\x08\x43\x61tegory\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x07\n\x03\x43\x41R\x10\x01\x12\x0b\n\x07\x42ICYCLE\x10\x02\x42\x07\n\x05model')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'vehicle_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
-  _globals['_VEHICLE']._serialized_start=26
-  _globals['_VEHICLE']._serialized_end=139
-  _globals['_VEHICLE_CATEGORY']._serialized_start=94
-  _globals['_VEHICLE_CATEGORY']._serialized_end=139
+  _globals['_VEHICLE_SPECSENTRY']._loaded_options = None
+  _globals['_VEHICLE_SPECSENTRY']._serialized_options = b'8\001'
+  _globals['_VEHICLE']._serialized_start=27
+  _globals['_VEHICLE']._serialized_end=279
+  _globals['_VEHICLE_SPECSENTRY']._serialized_start=179
+  _globals['_VEHICLE_SPECSENTRY']._serialized_end=223
+  _globals['_VEHICLE_CATEGORY']._serialized_start=225
+  _globals['_VEHICLE_CATEGORY']._serialized_end=270
 # @@protoc_insertion_point(module_scope)
