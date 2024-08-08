@@ -1,7 +1,7 @@
-import race_pb2
-import vehicle_pb2
+from race_pb2 import Race, Driver
 from vehicle_pb2 import Vehicle
 import base64
+import sys
 
 
 def serialize_to_string(message):
@@ -14,11 +14,14 @@ def serialize_to_string(message):
 
 def parse_from_string(message, encoded_str):
     if isinstance(encoded_str, str):
-        message.ParseFromString(base64.b64decode(encoded_str))
-    elif isinstance(encoded_str, unicode):  # type: ignore
-        message.ParseFromString(encoded_str.decode("base64"))
-    else:
-        return None
+        # Decode base64 string to bytes
+        decoded_bytes = base64.b64decode(encoded_str)
+    # elif sys.version_info[0] < 3 and isinstance(encoded_str, unicode):
+    #     # For Python 2, handle unicode strings
+    #     decoded_bytes = base64.b64decode(encoded_str.encode('utf-8'))
+    # else:
+    #     return None
+    message.ParseFromString(decoded_bytes)
     return message
 
 
@@ -36,7 +39,7 @@ def add_methods(cls):
     cls.get_average_lap_time = get_average_lap_time
 
 # Extend the Race class with new methods
-add_methods(race_pb2.Race)
+add_methods(Race)
 
 
 # print(race_pb2.Race.add_lap_time)
@@ -56,12 +59,14 @@ add_methods(race_pb2.Race)
     
 # print('-----')
 
+
+
 # Example usage
 if __name__ == "__main__":
-    driver = race_pb2.Driver(name="John Doe", nicknames=["Speedster", "The Flash"], age=30)
+    driver = Driver(name="John Doe", nicknames=["Speedster", "The Flash"], age=30)
 
 
-    race = race_pb2.Race(
+    race = Race(
         title="Grand Prix",
         driver=driver,
         total_laps=75,
@@ -84,7 +89,7 @@ if __name__ == "__main__":
     serialized_race = serialize_to_string(race)
 
     # Deserialize from string
-    deserialized_race = parse_from_string(race_pb2.Race(), serialized_race)
+    deserialized_race = parse_from_string(Race(), serialized_race)
     print('--------')
     print('--------')
     print('AFTER DESERIALIZATION')
