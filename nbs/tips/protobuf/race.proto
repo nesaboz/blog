@@ -1,0 +1,22 @@
+syntax = "proto2";
+
+/* 
+compile this file using:
+% protoc --python_out=. -I=. path/to/this/proto/file.proto
+*/
+
+import "vehicle.proto";
+
+message Race {
+  optional string title = 1;
+  optional Driver driver = 2;
+  optional int32 total_laps = 3 [default=60];  // do not set up default values, it's a bad practice since defeats the point of serialization. In proto3 type it's not possible to define defaults anymore
+  repeated double lap_times = 4 [packed=true];   
+  optional vehicle.Vehicle vehicle = 5;                                                                                                                                            
+}
+
+message Driver {
+  optional string name = 1;
+  repeated string nicknames = 2;
+  optional int32 age = 3;
+}

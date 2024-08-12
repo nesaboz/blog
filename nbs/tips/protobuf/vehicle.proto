@@ -1,0 +1,19 @@
+syntax = "proto2";
+
+package vehicle;
+
+message Vehicle {
+  optional string id = 1;
+  enum Category {
+    UNKNOWN = 0;
+    CAR = 1;
+    BICYCLE = 2;
+  }
+  optional Category category = 2;
+  map<string, string> specs = 3;
+  // Note that oneof fields do not have a rule specified, only a type
+  oneof model {
+    string us_model = 4;
+    string eu_model = 5;
+  }
+}
