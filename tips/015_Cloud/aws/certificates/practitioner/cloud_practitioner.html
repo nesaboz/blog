@@ -1,0 +1,1656 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>4. IAM – Nenad Bozinovic</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../../">
+<link href="../../../../../favicon.ico" rel="icon">
+<script src="../../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../../../../styles.css">
+<meta property="og:title" content="4. IAM – Nenad Bozinovic">
+<meta property="og:description" content="My personal website">
+<meta property="og:site_name" content="Nenad Bozinovic">
+<meta name="twitter:title" content="4. IAM – Nenad Bozinovic">
+<meta name="twitter:description" content="My personal website">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../../../index.html">
+    <span class="navbar-title">Nenad Bozinovic</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../../../../../projects.html" aria-current="page"> 
+<span class="menu-text">Projects</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../../tips.html"> 
+<span class="menu-text">TILs</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../../media.html"> 
+<span class="menu-text">Media</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/nesaboz"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/nesaboz"> <i class="bi bi-twitter" role="img" aria-label="Twitter">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/nenadbozinovic/"> <i class="bi bi-linkedin" role="img" aria-label="Linkedin">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">4. IAM</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../../projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Projects</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../projects/openai/openai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Custom Chatbot and DALL-E using OpenAI’s GPT-4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../projects/fastapi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">REST API stress testing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../projects/caltrans.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data extraction from PDFs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../projects/hexagon-puzzle/hexagon-puzzle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hexagonal-puzzle</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../projects/spacenet8/spacenet8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Comparing Transformers and CNNs on the SpaceNet8 Flood Detection Challenge</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../projects/solar/solar.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Detecting solar panels from satellite images</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../projects/15_head_pose/head_pose.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Image Regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../projects/13_fastbook_chapter_5_image_classification/fastbook_chapter_5_image_classification.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pet Breed Classification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../projects/09_bear_classifier/bear_classifier.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bear classifier</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../projects/14_multi_label_classification/multi_label_classification.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Multi-label classification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../projects/transfer_learning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Transfer learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../projects/rock_paper_scissors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Rock paper scissors</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../projects/multiclass_image_classification.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Multiclass image classification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../projects/2_torchvision_conversions_samplers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Torchvision, Conversions, Samplers</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../projects/1_binary_image_classification.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Binary image classification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../projects/binary_classification.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Binary Classification</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../../tips.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TILs</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Cloud</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/015_Cloud/docker.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Docker</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/015_Cloud/kubernetes/kubernetes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Kubernetes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/015_Cloud/github_actions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">GitHub Actions with access to AWS</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/015_Cloud/aws/aws_basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">AWS basics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/015_Cloud/aws/ec2_cli.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Manage EC2 via CLI</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/015_Cloud/aws/ec2_image_builder.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Creating an Image Pipeline with EC2 Image Builder</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/015_Cloud/aws/ec2_autoscaling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Auto Scaling Group</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/015_Cloud/aws/lambda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">AWS Lambdas with layers and from containers</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/015_Cloud/aws/queues.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">AWS SQS, SNS, and Kafka</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/015_Cloud/aws/glue.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">AWS Glue</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/015_Cloud/aws/application_integration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Application Integration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/015_Cloud/aws/host_static_website.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hosting a static website via AWS EC2 and Lambda</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/015_Cloud/aws/host_web_app.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Host Web App</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/015_Cloud/aws/aws_rds.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">AWS RDS</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/015_Cloud/aws/step_functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Step Function project</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/015_Cloud/paperspace.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Paperspace</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Terminal</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/030_Terminal/environments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Environments</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/030_Terminal/zsh.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">zsh</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Design Patterns</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/DesignPatterns/creational.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Creational</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/DesignPatterns/structural.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Structural</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/DesignPatterns/behavioral.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Behavioral</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">PyTorch</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/040_PyTorch/augmentations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Augmentations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/040_PyTorch/convolutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Convolutions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/040_PyTorch/loss.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Loss</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/040_PyTorch/metrics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Metrics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/040_PyTorch/models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/040_PyTorch/tensor.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tensor</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/040_PyTorch/backprop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Backpropagation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/040_PyTorch/feature_engineering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Feature Engineering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/040_PyTorch/quadratic_function_fit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quadratic function fitting</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/040_PyTorch/linear_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear Regression</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Python</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/010_Python/logging.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Logging</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/010_Python/datetime.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Datetime</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/010_Python/fileio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">FileIO</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/010_Python/functools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Functools</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/010_Python/pathlib.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pathlib</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/010_Python/pil.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PIL</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/010_Python/pytest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PyTest</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/010_Python/regex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Regex</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/010_Python/numpy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Numpy</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/010_Python/pydata.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PyData</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/010_Python/copy_and_deepcopy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><code>copy</code> module</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/010_Python/setoperations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Set operations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/010_Python/visualizations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Visualizations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/010_Python/general.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Python General</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/010_Python/parser_example.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parser example</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">Jupyter</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/020_Jupyter/images.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Images</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/020_Jupyter/kernels.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Kernels</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/020_Jupyter/general.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Jupyter General</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/020_Jupyter/matplotlib.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Matplotlib</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true">
+ <span class="menu-text">FastAI</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/050_FastAI/azure.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Azure</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/050_FastAI/fastai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">FastAI</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/050_FastAI/huggingface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">HuggingFace</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/050_FastAI/nbdev.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">nbdev</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
+ <span class="menu-text">Misc</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/060_Misc/sql/sql.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SQL examples</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/060_Misc/git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Git</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/060_Misc/latex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Latex</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/060_Misc/os.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">OS</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/060_Misc/customdomain.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Custom domain</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/060_Misc/kaggle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Kaggle</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/060_Misc/statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/060_Misc/wsl.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">WSL</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/060_Misc/video.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Video capture and processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/060_Misc/labeling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Labeling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/060_Misc/pdf.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Extract pages from PDF</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../tips/060_Misc/vscode.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">VS Code</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#ec2" id="toc-ec2" class="nav-link active" data-scroll-target="#ec2">5. EC2</a></li>
+  <li><a href="#instance-storage" id="toc-instance-storage" class="nav-link" data-scroll-target="#instance-storage">6. Instance Storage</a></li>
+  <li><a href="#load-balancers" id="toc-load-balancers" class="nav-link" data-scroll-target="#load-balancers">7. Load Balancers</a>
+  <ul class="collapse">
+  <li><a href="#autoscaling-group-asg" id="toc-autoscaling-group-asg" class="nav-link" data-scroll-target="#autoscaling-group-asg">Autoscaling group (ASG)</a></li>
+  </ul></li>
+  <li><a href="#s3" id="toc-s3" class="nav-link" data-scroll-target="#s3">8. S3</a></li>
+  <li><a href="#databases" id="toc-databases" class="nav-link" data-scroll-target="#databases">9. Databases</a></li>
+  <li><a href="#ecs-lambda-batch-lightsail" id="toc-ecs-lambda-batch-lightsail" class="nav-link" data-scroll-target="#ecs-lambda-batch-lightsail">10. ECS, Lambda, Batch, Lightsail</a></li>
+  <li><a href="#deployment" id="toc-deployment" class="nav-link" data-scroll-target="#deployment">11. Deployment</a></li>
+  <li><a href="#global-services" id="toc-global-services" class="nav-link" data-scroll-target="#global-services">12. Global services</a>
+  <ul class="collapse">
+  <li><a href="#route-53---managed-dns" id="toc-route-53---managed-dns" class="nav-link" data-scroll-target="#route-53---managed-dns">Route 53 - managed DNS</a></li>
+  <li><a href="#aws-cloudfront" id="toc-aws-cloudfront" class="nav-link" data-scroll-target="#aws-cloudfront">AWS CloudFront</a></li>
+  </ul></li>
+  <li><a href="#cloud-integration" id="toc-cloud-integration" class="nav-link" data-scroll-target="#cloud-integration">13. Cloud Integration</a>
+  <ul class="collapse">
+  <li><a href="#sqs-simple-queue-service" id="toc-sqs-simple-queue-service" class="nav-link" data-scroll-target="#sqs-simple-queue-service">SQS (Simple Queue Service)</a></li>
+  <li><a href="#amazon-kinesis" id="toc-amazon-kinesis" class="nav-link" data-scroll-target="#amazon-kinesis">Amazon Kinesis</a></li>
+  <li><a href="#sns-simple-notification-service" id="toc-sns-simple-notification-service" class="nav-link" data-scroll-target="#sns-simple-notification-service">SNS (Simple Notification Service)</a></li>
+  <li><a href="#amazon-mq" id="toc-amazon-mq" class="nav-link" data-scroll-target="#amazon-mq">Amazon MQ</a></li>
+  </ul></li>
+  <li><a href="#monitoring" id="toc-monitoring" class="nav-link" data-scroll-target="#monitoring">14. Monitoring</a></li>
+  <li><a href="#vpc-and-networking" id="toc-vpc-and-networking" class="nav-link" data-scroll-target="#vpc-and-networking">15. VPC and Networking</a></li>
+  <li><a href="#security" id="toc-security" class="nav-link" data-scroll-target="#security">16. Security</a></li>
+  <li><a href="#machine-learning" id="toc-machine-learning" class="nav-link" data-scroll-target="#machine-learning">17. Machine Learning</a></li>
+  <li><a href="#account-management" id="toc-account-management" class="nav-link" data-scroll-target="#account-management">18. Account management</a></li>
+  <li><a href="#advanced-identity" id="toc-advanced-identity" class="nav-link" data-scroll-target="#advanced-identity">19. Advanced Identity</a></li>
+  <li><a href="#aws-architecture-best-practices" id="toc-aws-architecture-best-practices" class="nav-link" data-scroll-target="#aws-architecture-best-practices">20. AWS Architecture best practices</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/nesaboz/blog/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">4. IAM</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
+<section id="ec2" class="level1">
+<h1>5. EC2</h1>
+<p>EC2 User Data script can bootstrap the instance. It is executed only once when the instance is launched.</p>
+<p>Example: m5.xlarge: m is instance class, 5 is the generation, xlarge is the size.</p>
+<ul>
+<li><code>c</code> class: compute optimized</li>
+<li><code>R</code>, <code>X</code>, <code>High Memory</code>, <code>z1d</code> type: RAM optimized, for in memory databases, cache, real time big data</li>
+<li>‘I’, ‘D’, ‘H1’: storage intensive (databases, cache, etc.)</li>
+<li>and many more: <a href="https://instances.vantage.sh">ec2instances info</a></li>
+</ul>
+<section id="security-groups" class="level4">
+<h4 class="anchored" data-anchor-id="security-groups">Security Groups</h4>
+<ul>
+<li><p>security group is a firewall, regulate ports, IP ranges, inbound and outbound traffic</p></li>
+<li><p>0.0.0.0/0 means all IP addresses</p></li>
+<li><p>can be attached to multiple instances</p></li>
+<li><p>locekd to the region</p></li>
+<li><p>lives outside the instance</p></li>
+<li><p><strong>good to maintain a security group for SSH access</strong></p></li>
+<li><p>any timeout is security group issue</p></li>
+<li><p>connection refused is instance issue</p></li>
+<li><p>by default all inbound is closed, all outbound is open</p></li>
+<li><p>security group can reference another security group, this is good to allow bunch of instances to talk to - each other in groups</p></li>
+<li><p>22 is SSH</p></li>
+<li><p>21 is FTP</p></li>
+<li><p>80 is HTTP unsecured websites</p></li>
+<li><p>443 is HTTPS secured websites</p></li>
+<li><p>3389 is RDP (for Windows)</p></li>
+</ul>
+<p>If you lose Key pair pem file you will need to create a new public one from it like:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span> <span class="at">-y</span> <span class="at">-f</span> Test.pem <span class="op">&gt;</span> Test.pub</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> Test.pub</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>then connect to the instance using browser console and add the public key to the authorized_keys file:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> ~/.ssh/authorized_keys</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>with that you can connect to the instance from local machine::</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 400 Test.pem  <span class="co"># to change the permissions of the key</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-i</span> Test.pem ubuntu@<span class="op">&lt;</span>public IP<span class="op">&gt;</span>  <span class="co"># for for Ubuntu and for Amazon Linux AMI use `ec2-user`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Always attach roles to the instance to give access to other AWS services.</p>
+<ul>
+<li>On-demand, Reserved, Spot, and Dedicated Hosts are the pricing models for EC2 instances.</li>
+</ul>
+</section>
+</section>
+<section id="instance-storage" class="level1">
+<h1>6. Instance Storage</h1>
+<section id="ebs-elastic-block-storage" class="level4">
+<h4 class="anchored" data-anchor-id="ebs-elastic-block-storage">EBS (Elastic Block Storage)</h4>
+<p>They are network drives you can attach to your instances while they run. They can persist data after the instance is terminated. They are bound to a specific availability zone. They are automatically replicated within the availability zone. Can be attached only to one instance at a time.</p>
+<p>What if we want to transfer Volume to different AZ or to simply back it up, then we have to snapshot it. We can then recreate a new EBS from the snapshot, even in a different AZ. We can also archive the snapshot but it takes 24-48 hours to get it back.</p>
+</section>
+<section id="ami-amazon-machine-image" class="level4">
+<h4 class="anchored" data-anchor-id="ami-amazon-machine-image">AMI (Amazon Machine Image)</h4>
+<p>AMI is super useful to speed up the new instance launching, it is equivalent to run bunch of user data and then store the state of the machine.</p>
+</section>
+<section id="ec2-image-builder" class="level4">
+<h4 class="anchored" data-anchor-id="ec2-image-builder">EC2 Image Builder</h4>
+<p>This is service that can build and test AMIs. One can first create Components, then bundle them to create AMIs. These AMIs can also be tested automatically, updates scheduled, etc.</p>
+</section>
+<section id="ec2-instance-store" class="level4">
+<h4 class="anchored" data-anchor-id="ec2-instance-store">EC2 Instance Store</h4>
+<p>It is a temporary block storage for EC2 instances. It is lost when the instance is stopped or terminated. It is physically attached to the machine hosting the instance. It is much faster than EBS but it’s available only on certain instance types (for example <code>g4dn</code>, <code>i3</code>, <code>m5d</code>, etc. but not on small <code>t</code> types).</p>
+</section>
+<section id="efs-elastic-file-system" class="level4">
+<h4 class="anchored" data-anchor-id="efs-elastic-file-system">EFS Elastic File System</h4>
+<p>This is a managed NFS (Network File System) that can be mounted on many EC2 instances (as well as on-prem but with VPN or DirectConnect). It is highly available, scalable. It can be used for content management, web serving, data sharing, etc. It is 2-3X more expensive than EBS. Available in all AZs, VPCs, and Regions, at the same time. EFS Infrequent Access (EFS-IA) is a cheaper/slower version of EFS with lifecycle policy.</p>
+</section>
+<section id="amazon-fsx-for-1-lustre-linux-cluster-lustre-and-2-windows-file-server" class="level4">
+<h4 class="anchored" data-anchor-id="amazon-fsx-for-1-lustre-linux-cluster-lustre-and-2-windows-file-server">Amazon FSx for 1) Lustre (Linux + Cluster = Lustre) and 2) Windows File Server</h4>
+<p>This is a high-performance file system optimized for fast processing of workloads such as machine learning, high-performance computing, video processing, financial modeling, etc. It is a fully managed service that can be integrated with S3. The data is stored in S3 but managed by AWS with super small latencies.</p>
+</section>
+</section>
+<section id="load-balancers" class="level1">
+<h1>7. Load Balancers</h1>
+<p>There is Application (HTTP like, layer 7), Network (high performance, millions request per second, TCP,UDP,TLS, layer 4), and Gateway (IP packets themselves, GENEVE protocol, layer 3, typically used to check security via 3rd party).</p>
+<p>We run 2 instances, join them in a target group, and then create an Application LB (ALB) and point to the group. The LB is managed for us.</p>
+<section id="autoscaling-group-asg" class="level2">
+<h2 class="anchored" data-anchor-id="autoscaling-group-asg">Autoscaling group (ASG)</h2>
+<p>ASG embodies elasticity, across multiple AZ. There is minimum, desired, and maximum number of instances. We need to set up template, type, security group, EBS, the usual. The ASG will now always try to keep desired number of instances even if they crash. There are scaling options (Manual, Dynamic(Simple, Target, Schedule), and Predictive).</p>
+</section>
+</section>
+<section id="s3" class="level1">
+<h1>8. S3</h1>
+<p>S3 has 11 nines durability and 4 nines availability.</p>
+<p>Replication works only with versioning enabled. It has to be enabled in the bucket tab Management -&gt; Replication. There is same region replication (SRR) and cross region replication (CRR). It is asynchronous and can be used for disaster recovery, backups, etc.</p>
+<p>What’s free with S3 is 1) data transfer into S3, and S3 out to EC2 when instance is in the same region, 3) CloudFront.</p>
+<p>There are several storage classes from “S3 Express One Zone” via “Standard” to “Glacier”. We can define these when uploading the file or later in the Management tab. We can also set up lifecycle policies to move files between these classes (say move Standard to Intelligent Tiering after 30 days, then to Glacier after 60 days, etc.).</p>
+<p>We pay money for all storage.</p>
+<p>Snow Family is a physical device that can be used to transfer data to AWS. It is secure, fast, and can be used for large data transfers. SnowCone and SnowBall are the most popular devices. SSD (Solid State Drive) is more advanced then HDD (Hard Disk Drive).</p>
+</section>
+<section id="databases" class="level1">
+<h1>9. Databases</h1>
+<p>RDS is relational store, can create snapshot to back up or replicate, can create read replicas. Can be reserved.</p>
+<p>Aurora is a MySQL and PostgreSQL compatible database, it’s serverless, and faster then RDS.</p>
+<p>Elastic Cache is in-memory data store, can be used for caching, session store, etc. Can be used on many database types.</p>
+<p>Redshift is a data warehousing solution, can be used for business intelligence, etc. It is based on PostgreSQL.</p>
+<p>Dynamo DB is a NoSQL, it’s serverless and single digit millisecond latency. Stores key-value pairs, documents, graphs, etc.</p>
+<p>DynamoDB Accelerator (DAX) is a caching layer in front of DynamoDB, and no other database. It’s 10X better then ElastiCache.</p>
+<p>DynamoDB Global Tables is a multi-region, fully managed, and multi-master database (aka active-active replication means user can write in both regions).</p>
+</section>
+<section id="ecs-lambda-batch-lightsail" class="level1">
+<h1>10. ECS, Lambda, Batch, Lightsail</h1>
+<p>ECS and Fargate can run containers on AWS. ECS is more control and can run on EC2 or Fargate, which is serverless. ECS has Task Definition, Service, Cluster. Fargate has only Task Definition.</p>
+<p>Lightsail is miniature AWS, has fixed prices and trimmed down flexibility.</p>
+<p>AWS Batch run processes in batch.</p>
+</section>
+<section id="deployment" class="level1">
+<h1>11. Deployment</h1>
+<ul>
+<li><p>CloudFormation is Infra as Code,</p></li>
+<li><p>Beanstalk (PaaS)</p>
+<ul>
+<li>Role needs AWSElasticBeanstalkWebTier, AWSElasticBeanstalkMulticontainerDocker, AWSElasticBeanstalkWorkerTier</li>
+<li>Beanstalk uses CloudFormation</li>
+</ul></li>
+<li><p>CodeDeploy (Hybrid) deploys code to EC2 or on-premises</p></li>
+<li><p>AWS System Manager (SSM) (hybrid) is a service that allows you to automate tasks across your AWS resources. It can be used to patch, automate, run commands, etc. It needs IAM role that allows SSM to be assigned to EC2 instance. It also needs SSM agent installed but this should be there by default on Amazon AMIs and Ubuntu (you will need to install it for on-premises machines). So now we can connect to EC2 machine without SSH port open. One can find all the instances in the Systems Manager -&gt; Fleet Manager.</p></li>
+<li><p>AWS Parameter Store is a service that allows you to store configuration data and secrets. It can be used to store passwords, database strings, etc. It can be used with IAM roles to give access to the instances.</p></li>
+<li><p>AWS Secrets Manager serves to store secrets.</p></li>
+<li><p>Code Commit is a Git service</p></li>
+<li><p>Code Build is a build service</p></li>
+<li><p>Code Deploy is a deployment service</p></li>
+<li><p>Code Pipeline is a orchestration service</p></li>
+<li><p>Code Star is allowing for CICD</p></li>
+<li><p>Cloud9 is an IDE in the cloud</p></li>
+<li><p>AWS CDK (this is creating services using some language like Python, which is then translated to CloudFormation)</p></li>
+</ul>
+</section>
+<section id="global-services" class="level1">
+<h1>12. Global services</h1>
+<section id="route-53---managed-dns" class="level3">
+<h3 class="anchored" data-anchor-id="route-53---managed-dns">Route 53 - managed DNS</h3>
+<ul>
+<li>hostname to IPv4 is called A-record</li>
+<li>hostname to IPv6 is called AAAA record</li>
+<li>hostname to hostname is called CNAME</li>
+<li>hostname to AWS resource is called Alias</li>
+</ul>
+<p>Routing polices: - Simple routing policy is one record with multiple IP addresses - Weighted routing policy is to distribute the traffic - Latency routing policy is to minimize latency - Failover routing policy is to help with disaster recovery</p>
+<p>We can buy a domain, then create EC2 web servers that host some application, and then create a Route 53 A-records to point to the EC2 web servers, say based on latency. Then, when a user, from around the world, goes to the domain, they will be redirected to the closest server.</p>
+</section>
+<section id="aws-cloudfront" class="level3">
+<h3 class="anchored" data-anchor-id="aws-cloudfront">AWS CloudFront</h3>
+<p>AWS CloudFront is CDN and it caches content around the world. Origin can be S3 bucket or HTTP backend, or anything. Enhanced security with CloudFront Origin Access Control (OAC). Note that CloudFront is great for static content, S3 cross-region-replication is great for dynamic content that need to have low-latency.</p>
+<p>We first create a CloudFront distribution, then we point it to the S3 bucket, then we can set up the cache behavior, TTL, etc. We can also set up the security, like Origin Access Control (OAC) to restrict access to the S3 bucket, we need to S3 bucket a policy so it is accessible only from CloudFront.</p>
+<p>Web application firewall (WAF) is Layer 7 security service, and AWS Shield is for DDoS protection.</p>
+<p>AWS Shield Advanced provides enhanced protections for your applications running on protected Amazon EC2, Elastic Load Balancing (ELB), Amazon CloudFront, AWS Global Accelerator, and Route 53 resources against more sophisticated and larger attacks.</p>
+<p>S3 Accelerated Transfer: S3 buckets are linked to only one region. If you want to upload to a S3 bucket that is far away, you want to use S3 Accelerated Transfer (this is just a feature under bucket/properties). <a href="http://s3-accelerate-speedtest.s3-accelerate.amazonaws.com/en/accelerate-speed-comparsion.html">This</a> tool compares S3 transfer acceleration upload/download to one specific bucket. So if you need fast transfer to S3 bucket from around the world, use it (btw, the acceleration happens by using edge locations).</p>
+<p>AWS Global accelerator: leverages internal AWS network (which is fast) to optimize route to the application using edge locations (note that Global accelerator does not cache any content). If enabled, 2 Anycast IP addresses are assigned to the application, and the traffic is routed to the optimal endpoint. <a href="https://speedtest.globalaccelerator.aws/#/">Test</a>. For global accelerator we need to create 1) accelerator, 2) listener, 3) endpoint group, 4) endpoints. We can also set up the traffic dials, like percentage of traffic to go to one endpoint, etc.</p>
+<p>AWS Outpost, is like having AWS racks on-premisses.</p>
+<p>AWS Wavelength, is like having basic AWS racks in the 5G towers (with EC2 instances, EBS, etc.) for ultra-low latency applications.</p>
+<p>AWS Local Zones extend VPC into more zones outside default AZs. For example if we define a subnet in Boston, we can then create EC2 instance in that zone. This allows ultra-low latency applications.</p>
+<p>Final notes on global services: - Single-region, single AZ is easy to set up, but not fault tolerant. - Single-region, multi-AZ is fault tolerant, but not disaster tolerant. - Multi-region Active-Passive, only writes to active. Disaster tolerant, but more expensive and complex. - Multi-region Active-Active, writes to both. Disaster tolerant, but more expensive and complex.</p>
+</section>
+</section>
+<section id="cloud-integration" class="level1">
+<h1>13. Cloud Integration</h1>
+<p>Let’s decouple services, so that they can be scaled independently. We can use SQS, SNS, Kinesis, and Amazon MQ for this.</p>
+<section id="sqs-simple-queue-service" class="level3">
+<h3 class="anchored" data-anchor-id="sqs-simple-queue-service">SQS (Simple Queue Service)</h3>
+<p>Producer/Consumer model. Pull based. 1-10K per second. Message retention is 4-14 days. Standard or FIFO order.</p>
+</section>
+<section id="amazon-kinesis" class="level3">
+<h3 class="anchored" data-anchor-id="amazon-kinesis">Amazon Kinesis</h3>
+<p>Kinesis = real-time big data. Gets data (Kinesis Data Streams), analytics using SQL (Kinesis Data Analytics), save into S3, Redshift (Kinesis Firehose). Side thing would be real-time video streams (Kinesis Video Streams).</p>
+</section>
+<section id="sns-simple-notification-service" class="level3">
+<h3 class="anchored" data-anchor-id="sns-simple-notification-service">SNS (Simple Notification Service)</h3>
+<p>Push based notifications to mobile devices, email, HTTP endpoints, etc. It is pub/sub model. It can be used to send messages to multiple subscribers. Mailinator.com is a good tool to test email notifications.</p>
+</section>
+<section id="amazon-mq" class="level3">
+<h3 class="anchored" data-anchor-id="amazon-mq">Amazon MQ</h3>
+<p>SQS and SNS are cloud native, Amazon MQ is managed message broker service for ActiveMQ and RabbitMQ. It is good for legacy applications that use ActiveMQ or RabbitMQ. Amazon MQ doesn’t scale as much as SQS.</p>
+</section>
+</section>
+<section id="monitoring" class="level1">
+<h1>14. Monitoring</h1>
+<p>CloudWatch has: - metrics: can visualize high level - alarms: one can create alarms directly for EC2 instances too. Billing alarm works only in us-east-1 region. - logs: logs everything line by line, needs CloudWatch Logs Agent (can work hybrid). Very useful. - events: EventBridge can be reactive to any event or just run on schedule. It can activate for example to send emails, run Lambdas etc. It can also accepts third party events via Event Bus. It is quite powerful. It’s also serverless. - X-ray gives visual analysis of the <em>distributed</em> applications. It can be used to debug, trace, and analyze the application. It can be used to trace requests as they travel through the application. It can be used to identify bottlenecks, etc.</p>
+<p>CloudTrail is for compliance. All high level AWS actions are tracked. Can be ported to Logs or S3.</p>
+<p>CodeGuru is not available in all regions (like not in N.Cal). CodeGuru Reviewer is ML powered code review. CodeGuru Profiler is to profile running code.</p>
+<p>AWS Health Dashboard is for health of AWS services. Personal Health Dashboard is for your account.</p>
+<p>Trusted Advisor is for cost optimization, performance, security, fault tolerance, and service limits. It is available in Business and Enterprise support plans.</p>
+</section>
+<section id="vpc-and-networking" class="level1">
+<h1>15. VPC and Networking</h1>
+<p>VPC is virtual private cloud. It is a region specific. It can have subnets (public is accessible by internet, and private is not), assigned to availability zone. To define access to the internet and between subnets we use route tables.</p>
+<p>Each VPC has CIDR range - a range of IP addresses allowed in the VPC. It can be IPv4 or IPv6.</p>
+<p>Internet Gateway is horizontally scaled, redundant, VPC component that allows access to the internet from the VPC. It is attached to the VPC. As soon as we have IGW and a route to it, that makes subnet public. VPC can have only 1 IGW.</p>
+<p>NAT Gateway (AWS managed) or NAT Instance (self-managed) is a gateway that allows private subnet to access the internet.</p>
+<p>cidr.xyz is a good tool to visualize CIDR ranges. These are valid only for private IP addresses of course.</p>
+<p>NACL (Network Access Control List) is a firewall that controls traffic from and to subnet. Can have allow and deny rules. It’s at a subnet level. Return traffic must be explicitly allowed (it’s stateless).</p>
+<p>Security Groups - can have only allow rules. It’s at the EC2 instance level. Return traffic is allowed by default (i.e.&nbsp;it’s stateful).</p>
+<p>VPC Flow Logs - captures information about IP traffic going to and from network interfaces in the VPC. Helps to diagnose network issues, understand traffic patterns.</p>
+<p>VPC peering - allows to connect 2 VPCs. It’s not transitive (i.e.&nbsp;if A is peered with B and B is peered with C, A is not peered with C). It’s not possible to have overlapping CIDR ranges.</p>
+<p>VPC Endpoints - allows to connect to AWS services without going through the internet. It’s secure and scalable. VPC Endpoint Gateway: is to access S3 and DynamoDB VPC Endpoint Interface: is for the rest of AWS services.</p>
+<p>PrivateLink - allows to connect to services hosted by other AWS accounts. It’s secure and scalable, does not require VPC peering, IGW, NAT, route tables. It requires <strong>1) Network Load Balancer on 3rd party side, and 2) Elastic Network Interface (ENI) on your side</strong>, then all traffic is private, no internet involved.</p>
+<p>AWS Site-to-site VPN, (encrypted) connects on-premises data center to AWS. It’s secure and scalable. It’s a hardware VPN connection between <strong>customer gateway and virtual private gateway</strong>. It’s encrypted and uses IPsec.</p>
+<p>Direct Connect (DX) is a physical connection between on-premises data center and AWS. It’s more expensive. Takes over a month to establish.</p>
+<p>AWS Client VPN, connects local computers using OpenVPN to your private network in AWS. Allows to connect to EC2 instances over private IP, just as if you were in the private VPC network. Goes over public internet.</p>
+<p>To connect thousands of VPCs, use Transit Gateway. It’s a hub and spoke model. It’s a regional service. It can connect VPCs, VPNs, Direct Connects, etc. It’s a fully managed service.</p>
+</section>
+<section id="security" class="level1">
+<h1>16. Security</h1>
+<p>AWS Shield protects against DDoS attacks.</p>
+<p>AWS WAF (Web Application Firewall) protects against SQL injection, cross-site scripting, etc.</p>
+<p>AWS Network Firewall protects against layer 3-7 attacks. It operates at the VPC level.</p>
+<p>AWS Firewall Manager is a security management service that allows to centrally configure and manage firewall rules across accounts and applications.</p>
+<p>Penetration testing is allowed on some services, but not all. It’s good to ask AWS first.</p>
+<p>Data at rest and motion can be both encrypted. AWS KMS is a service that allows to create and manage encryption keys. It’s integrated with many AWS services.</p>
+<p>CloudHSM is a hardware security module that allows to generate and use encryption keys. It’s a dedicated hardware.</p>
+<p>We can see all keys in AWS KMS: - AWS Managed Key (start like aws/s3, aws/ebs, etc.) - Customer Managed Key</p>
+<p>AWS Certificate Manager (ACM) is a service that allows to provision, manage, and deploy SSL/TLS certificates. For example it can be added to Application Load Balancer so all traffic is encrypted (so called in-flight encryption). It can be loaded to CloudFront, API Gateway, etc.</p>
+<p>AWS Secrets Manager is a service that allows to store, retrieve, and rotate secrets. It can be used to store database credentials, API keys, etc. It can be integrated with RDS, Redshift, DocumentDB, etc. You can get the secret value from the CLI or most languages.</p>
+<p>AWS Artifact - for compliance. Global Service. It’s a portal that provides on-demand access to AWS compliance reports.</p>
+<p>GuardDuty is a threat detection service that continuously monitors for malicious activity and unauthorized behavior. It can be used to detect unusual API calls, unauthorized deployments, etc. Analyzes all logs, or many more features (paid).</p>
+<p>Amazon Inspector - On EC2 instances (uses AWS System Manager) - For Containers in ECR (on push) - For Lambda functions (on deployment) Report findings to Security Hub and/or EventBridge. Looks for CVE (Common Vulnerabilities and Exposures).</p>
+<p>AWS Config Tracks resource configuration and compliance.</p>
+<p>Amazon Macie Uses ML to detect Personal Identifiable Information (PII) and sensitive data in AWS. Notifies via EventBridge.</p>
+<p>AWS Security Hub - aggregates findings into one place.</p>
+<p>Amazon Detective - analyzes, investigates, and identifies the root cause of security issues or suspicious activities.</p>
+<p>AWS Abuse is to report abuse.</p>
+<p>Root user only can: close the account, register in the AWS Marketplace, change AWS Support plan.</p>
+<p>IAM Access Analyzer - analyzes resource policies to detect any potential security issues.</p>
+</section>
+<section id="machine-learning" class="level1">
+<h1>17. Machine Learning</h1>
+<ul>
+<li>Rekognition is for classification, detection, recognition, etc. of images and videos.</li>
+<li>Transcribe is for speech to text. Can redact, works on multiple languages. Can create metadata for searchable archive. This can be useful for podcasts.</li>
+<li>Polly - text to speech.</li>
+<li>Lex - chatbots, bundled with Connect but can trigger Lambda functions.</li>
+<li>Comprehend - NLP, sentiment analysis, key phrase extraction, language detection, etc.</li>
+<li>SageMaker - ML service, can train, tune, deploy models.</li>
+<li>Translate - language translation.</li>
+<li>Forecast - time series forecasting.</li>
+<li>Kendra - document search service.</li>
+<li>Personalize - recommendation service.</li>
+<li>Textract - OCR, can extract text, tables, etc. from images.</li>
+</ul>
+</section>
+<section id="account-management" class="level1">
+<h1>18. Account management</h1>
+<p>AWS Organizations - allows to manage multiple AWS accounts. It allows to create groups of accounts, apply policies, etc.</p>
+<p>OU (Organizational Unit) is a group of accounts.</p>
+<p>SCP (Service Control Policy) is a policy that can be applied to OU or account. It allows to control what services can be used, what regions, etc. It looks like IAM policy but it’s much bigger and applies across accounts.</p>
+<p>Once can have consolidated billing to increase savings.</p>
+<p>Bob receives the cost-benefit from Susan’s Reserved Instances (RI) only if he launches his instances in the same Availability Zone (AZ) where Susan purchased her Reserved Instances</p>
+<p>AWS Control Tower is a service that allows to set up and govern a new, secure, multi-account AWS environment. It’s a managed service that automates the set up of a new environment.</p>
+<p>AWS Resource Access Manager (RAM) is a service that allows to share AWS resources with other AWS accounts. It can be used to share subnets, transit gateways, etc.</p>
+<p>AWS Service Catalog is a service that allows to create and manage catalogs of IT services that are approved for use on AWS. It can be used to create a portfolio of products, manage access, etc.</p>
+<p>Pricing Models, some are free, some are free trial, some pay only for underlying resources.</p>
+<p>AWS Pricing Calculator: calculator.aws</p>
+<p>AWS Compute Optimizer uses ML to recommend optimal AWS resources.</p>
+<p>AWS Trusted Advisor - checks the environment and makes recommendations. It’s a paid service.</p>
+<p>AWS Budgets - can set alarms for estimated costs.</p>
+<p>For each resource, each tag key must be unique, and each tag key can have only one value</p>
+<p>You must activate both AWS generated tags and user-defined tags separately before they can appear in Cost Explorer or on a cost allocation report</p>
+<p>AWS Firewall Manager is a security management service that allows you to centrally configure and manage firewall rules across your accounts and applications in AWS Organization.</p>
+<p>AWS Shield Advanced ($3K a month), 24/7 support, etc.</p>
+<p>Web Access Control List (ACL), associated to AWS Web Application Firewall (WAF), can have lots of rules (IP, HTTP filtering), SQL injection, geo match, rate-based. Web ACLs are applied to individual AWS resources such as a specific CloudFront distribution or load balancer. Operates on Level 7.</p>
+<p>Network ACL is associated with a subnet, and each subnet can only be associated with one network ACL at a time. It operates on Layer 3 &amp; 4.</p>
+</section>
+<section id="advanced-identity" class="level1">
+<h1>19. Advanced Identity</h1>
+<p>AWS STS is Security Token Service. It allows to assume roles, get temporary credentials, etc.</p>
+<p>AWS Cognito is a service that allows to manage user pools, identity pools, etc. It’s used for authentication, authorization, etc. Can be used for web, mobile, connect to Google, Faceboook, login.</p>
+<p>AWS Directory Service is a 1) managed Microsoft AD in the cloud, 2) AD Connector 3) Simple AD. It can be used to connect to on-premises AD, etc.</p>
+<p>AWS IAM Identity Center (same as SSO)</p>
+</section>
+<section id="aws-architecture-best-practices" class="level1">
+<h1>20. AWS Architecture best practices</h1>
+<ol type="1">
+<li>Operational Excellence</li>
+</ol>
+<ul>
+<li>Infra as code,</li>
+<li>Annotate, document</li>
+<li>Make frequent, small, reversible changes</li>
+<li>Refine operations procedures</li>
+<li>Anticipate failure</li>
+<li>Learn from all operational failures</li>
+</ul>
+<ol start="2" type="1">
+<li>Security</li>
+</ol>
+<ul>
+<li>Implement strong identity foundation</li>
+<li>Enable traceability</li>
+<li>Apply security at all layers</li>
+<li>Automate security best practices</li>
+<li>Protect data in transit and at rest</li>
+<li>Keep people away from data</li>
+<li>Prepare for security events</li>
+</ul>
+<ol start="3" type="1">
+<li>Reliability</li>
+</ol>
+<ul>
+<li>Test recovery procedures</li>
+<li>Automatically recover from failure</li>
+<li>Scale horizontally to increase aggregate system availability</li>
+<li>Stop guessing capacity</li>
+<li>Manage change in automation</li>
+<li>Understand dependencies</li>
+</ul>
+<ol start="4" type="1">
+<li>Performance Efficiency</li>
+</ol>
+<ul>
+<li>Democratize advanced technologies</li>
+<li>Go global in minutes</li>
+<li>Use serverless architecture</li>
+<li>Experiment more often</li>
+<li>Mechanical sympathy</li>
+<li>Use data to make decisions</li>
+</ul>
+<ol start="5" type="1">
+<li>Cost Optimization</li>
+</ol>
+<ul>
+<li>Adopt a consumption model</li>
+<li>Measure overall efficiency</li>
+<li>Stop spending money on data center operations</li>
+<li>Analyze and attribute expenditure</li>
+<li>Use managed services to reduce cost of ownership</li>
+<li>Trade capital expense for variable expense</li>
+<li>Use the right pricing model for the workload</li>
+</ul>
+<p>FAQ</p>
+<p>Cognito is for authentication.</p>
+<p>AWS CodeDeploy to deploy patches to many instances, Lambdas, ECS, as well as on premises.</p>
+<p>AWS Inspector is for security assessment, not infrastructure (AWS Config is for infrastructure).</p>
+<p>QuickStart References is a service that allows to deploy reference architectures on AWS. Good stuff.</p>
+<p>APN Consulting Partners provide consulting services, APN Technology Partners have some are companies that provide software solutions that are hosted on AWS.</p>
+<p>AWS SSO is now AWS Identity Center.</p>
+<p>AWS Health center has both Personal and Service Dashboard.</p>
+<p>AWS Local Zones are type of infra closer to end users.</p>
+<p>AWS Systems Manager is operations hub for your AWS applications and resources. Can be used for patching, running many scripts at once on instances, etc.</p>
+<p>DynamoDB is NoSQL database, global tables are multi-region, multi-master. DB Accelerator is caching layer in front of DynamoDB.</p>
+<p>CLoudTrain are logs but for admin actions, CloudWatch for compute logs (EC2, Lambda, etc).</p>
+<p>AWS Cost Explorer can do forecast.</p>
+<p>Reservation is supported: - Amazon EC2 Reserved Instances (RI) - Amazon DynamoDB Reserved Capacity - Amazon ElastiCache Reserved Nodes - Amazon RDS RIs - Amazon Redshift Reserved Nodes</p>
+<p>AWS Business Support provides architectural guidance contextual to your specific use-cases</p>
+<p>AWS Artifact is a portal that provides on-demand access to AWS compliance reports.</p>
+<p>AWS CAF groups its capabilities in six perspectives: Business, People, Governance, Platform, Security, and Operations.</p>
+<p>Compute Optimizer helps you choose optimal configurations for three types of AWS resources: Amazon EC2 instances, Amazon EBS volumes, and AWS Lambda functions, based on your utilization data.</p>
+<p>AWS Systems Manager is the operations hub for AWS</p>
+<p>The KMS keys that you create are customer managed keys.</p>
+<p>EBS volume can be attached to a single instance in the same Availability Zone (AZ) whereas EFS file system can be mounted on instances across multiple Availability Zones (AZ)</p>
+<p>The AWS Professional Services organization is a global team of experts that can help you realize your desired business outcomes when using the AWS Cloud.</p>
+<p>Each AWS Region consists of a minimum of three Availability Zones (AZ)</p>
+<p>Each Availability Zone (AZ) consists of one or more discrete data centers</p>
+<p>The AWS account must be able to operate as a standalone account. Only then it can be removed from AWS organizations</p>
+<p>The performance of AWS managed Amazon Relational Database Service (Amazon RDS) instance is better than a customer-managed database instance</p>
+<p><img src="https://assets-pt.media.datacumulus.com/aws-clf-pt/assets/pt1-q65-i1.jpg" class="img-fluid"></p>
+<p>https://assets-pt.media.datacumulus.com/aws-clf-pt/assets/pt1-q65-i2.jpg</p>
+<p>https://assets-pt.media.datacumulus.com/aws-clf-pt/assets/pt1-q65-i3.jpg</p>
+<p>https://aws.amazon.com/premiumsupport/plans/</p>
+<p>AWS CloudTrail Logs are encrypted by default.</p>
+<p>AWS Compute Optimizer delivers recommendations for: EC2 instances, EC2 Auto Scaling groups, Amazon EBS volumes, and AWS Lambda functions</p>
+<p>Amazon GuardDuty analyzes billions of events across your AWS accounts from AWS CloudTrail (AWS user and API activity in your accounts), Amazon VPC Flow Logs (network traffic data), and DNS Logs (name query patterns) to detect threat, malicious activity, and unauthorized behavior on your AWS account.</p>
+<p><strong>AWS Service Catalog lets you centrally manage your cloud resources to achieve governance at scale of your infrastructure as code (IaC) templates, written in CloudFormation or Terraform configurations.</strong></p>
+<p>Watch out for questions on AWS Cost Explorer vs AWS Budgets. AWS Budgets can alert you when your costs exceed your budgeted amount. Cost Explorer helps you visualize and manage your AWS costs and usage over time.</p>
+<p>Amazon DynamoDB supports both key-value and document data models.</p>
+<p>Cloud Foundations is a set of best practices for cloud computing. It is a framework for cloud adoption and transformation.</p>
+<p>You will pay a fee each time you read from or write data stored on the Amazon Elastic File System (Amazon EFS) - Infrequent Access storage class</p>
+<p>EC2 instances can access files on an Amazon Elastic File System (Amazon EFS) file system across many Availability Zones (AZ), Regions and VPCs.</p>
+<p>AWS Budgets enable you to plan your service usage, service costs, and instance reservations.</p>
+<p>AWS Migration Evaluator helps with migrations.</p>
+<p>Amazon Elastic File System (Amazon EFS) has encryption by default.</p>
+<p>Create separate AWS accounts for development and production environments to receive separate invoices</p>
+<p>Reserved instances are only for It is a commitment to pay in advance for specific Amazon EC2 or Amazon RDS instances.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("www\.nenadbozinovic\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="nesaboz/blog" data-repo-id="R_kgDOI-Xebw" data-category="Announcements" data-category-id="DIC_kwDOI-Xeb84CUjh-" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="light" data-lang="en" crossorigin="anonymous" data-loading="lazy" async="">
+</script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark">
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/nesaboz/blog/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
