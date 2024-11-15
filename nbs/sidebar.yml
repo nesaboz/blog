@@ -65,6 +65,7 @@ website:
               - tips/040_PyTorch/linear_regression.ipynb
           - section: Python
             contents:
+              - tips/010_Python/logging.ipynb
               - tips/010_Python/Datetime.ipynb
               - tips/010_Python/FileIO.ipynb
               - tips/010_Python/functools.ipynb
