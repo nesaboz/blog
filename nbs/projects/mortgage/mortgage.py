@@ -1,25 +1,28 @@
-"""Should I buy a house or rent?
-
-I followed Khan's academy [video](https://www.khanacademy.org/economics-finance-domain/core-finance/housing/renting-v-buying/v/renting-versus-buying-a-home) 
-and added more parameters.
-
-pip install streamlit numpy_financial altair
-
-To run:
-streamlit run mortgage.py 
-
-"""
-
 import streamlit as st
+import numpy as np
 import numpy_financial as npf
 import pandas as pd
 import altair as alt
 
 def main():
-    st.title("Mortgage Calculator with Sale Proceeds Analysis")
+    st.title("Investment Strategies Comparison with Home Purchase Decision")
 
     # Input parameters
     st.sidebar.header("Input Parameters")
+
+    # Monthly income parameter
+    monthly_income = st.sidebar.number_input(
+        "Monthly Income ($)",
+        value=10000,  # Default value
+        step=1000
+    )
+
+    # Monthly expenses parameter
+    monthly_expenses = st.sidebar.number_input(
+        "Monthly Expenses ($)",
+        value=3000,  # Default value
+        step=100
+    )
 
     # Home price
     home_price = st.sidebar.number_input("Home Price ($)", value=2500000, step=10000)
@@ -83,7 +86,7 @@ def main():
         "Annual Rent Increase Rate (%)",
         min_value=0.0,
         max_value=10.0,
-        value=3.0,
+        value=2.0,
         step=0.1
     ) / 100  # Convert percentage to decimal
 
@@ -152,30 +155,18 @@ def main():
     annual_tax_savings = annual_deductible_interest * tax_rate
     st.write(f"**Estimated Annual Tax Savings from Mortgage Interest Deduction:** ${annual_tax_savings:,.2f}")
 
-    # Investment growth
-    investment_schedule = investment_growth(down_payment, investment_return_rate, loan_term_months)
-
-    # Calculate cumulative rent payments
-    rent_schedule = cumulative_rent_payments(
-        initial_rent,
-        annual_rent_increase_rate,
-        loan_term_months
-    )
-
     # Calculate house value over time
     house_value_schedule = house_value_over_time(home_price, house_appreciation_rate, loan_term_months)
 
-    # Create property tax schedule
-    property_tax_df = property_tax_schedule(loan_term_months, home_price, property_tax_rate)
+    # Create property tax schedule with corrected function
+    property_tax_schedule_df = property_tax_schedule(loan_term_months, home_price, property_tax_rate)
 
     # Create upkeeping schedule
     upkeeping_schedule_df = upkeeping_schedule(loan_term_months, monthly_upkeeping_cost)
 
-    # Combine schedules for plotting
-    combined_schedule = pd.merge(schedule, investment_schedule, on='Month')
-    combined_schedule = pd.merge(combined_schedule, rent_schedule[['Month', 'Cumulative Rent']], on='Month')
-    combined_schedule = pd.merge(combined_schedule, house_value_schedule, on='Month')
-    combined_schedule = pd.merge(combined_schedule, property_tax_df, on='Month')
+    # Combine schedules
+    combined_schedule = pd.merge(schedule, house_value_schedule, on='Month')
+    combined_schedule = pd.merge(combined_schedule, property_tax_schedule_df, on='Month')
     combined_schedule = pd.merge(combined_schedule, upkeeping_schedule_df, on='Month')
 
     # Add cumulative property tax and upkeeping costs
@@ -186,33 +177,67 @@ def main():
     combined_schedule['Year'] = combined_schedule['Month'] / 12
     schedule['Year'] = schedule['Month'] / 12
 
-    # Limit the data to max_years
-    plot_data = combined_schedule[combined_schedule['Year'] <= max_years][[
-        'Year',
-        'Cumulative Interest',
-        'Cumulative Principal',
-        'Investment Balance',
-        'Cumulative Rent',
-        'House Value',
-        'Cumulative Property Tax',
-        'Cumulative Upkeeping Costs'
-    ]]
+    # Generate investment strategies
+    investment_strategy1_df, investment_strategy2_df = investment_strategies(
+        loan_term_months,
+        monthly_income,
+        monthly_expenses,
+        monthly_payment,
+        property_tax_schedule_df['Monthly Property Tax'],
+        monthly_upkeeping_cost,
+        investment_return_rate
+    )
 
-    # Melt the dataframe for plotting
+    # Checkbox options for each line
+    st.sidebar.header("Plot Options")
+    show_house_value = st.sidebar.checkbox("Show House Value", value=True)
+    show_cumulative_property_tax = st.sidebar.checkbox("Show Cumulative Property Tax", value=False)
+    show_cumulative_upkeeping = st.sidebar.checkbox("Show Cumulative Upkeeping Costs", value=False)
+    show_investment_strategy1 = st.sidebar.checkbox("Show Investment Strategy 1 (No House Purchase)", value=True)
+    show_investment_strategy2 = st.sidebar.checkbox("Show Investment Strategy 2 (After House Expenses)", value=True)
+
+    # Initialize plot data with 'Year' and 'Month'
+    plot_data = combined_schedule[['Month', 'Year']].copy()
+    plot_data['Month'] = plot_data['Month'].astype(int)
+
+    # Add data based on selected checkboxes
+    if show_house_value:
+        plot_data['House Value'] = combined_schedule['House Value']
+
+    if show_cumulative_property_tax:
+        plot_data['Cumulative Property Tax'] = combined_schedule['Cumulative Property Tax']
+
+    if show_cumulative_upkeeping:
+        plot_data['Cumulative Upkeeping Costs'] = combined_schedule['Cumulative Upkeeping Costs']
+
+    if show_investment_strategy1:
+        plot_data = plot_data.merge(investment_strategy1_df[['Month', 'Investment Balance (No House Purchase)']], on='Month', how='left')
+
+    if show_investment_strategy2:
+        plot_data = plot_data.merge(investment_strategy2_df[['Month', 'Investment Balance (After House Expenses)']], on='Month', how='left')
+
+    # Limit the data to max_years
+    plot_data = plot_data[plot_data['Year'] <= max_years]
+
+    # Melt data for plotting
     plot_data_melted = plot_data.melt('Year', var_name='Type', value_name='Amount')
 
-    # Plotting
+    # Plot the selected data
     chart = alt.Chart(plot_data_melted).mark_line().encode(
         x=alt.X('Year', title='Year'),
-        y='Amount',
+        y=alt.Y('Amount', title='Amount ($)'),
         color='Type'
     ).properties(
         width=700,
         height=400,
-        title='Mortgage Payments, Investment Growth, Rent, and House Value Over Time'
+        title='Investment Strategies and House Value Over Time'
     )
 
     st.altair_chart(chart, use_container_width=True)
+
+    # Investment balances at the time of sale
+    investment_balance_strategy1_at_sale = investment_strategy1_df.loc[sell_in_months - 1, 'Investment Balance (No House Purchase)']
+    investment_balance_strategy2_at_sale = investment_strategy2_df.loc[sell_in_months - 1, 'Investment Balance (After House Expenses)']
 
     # Calculations at the time of sale
     sale_house_value = house_value_schedule.loc[sell_in_months - 1, 'House Value']
@@ -224,8 +249,8 @@ def main():
     cumulative_principal_paid = schedule.loc[:sell_in_months - 1, 'Principal'].sum()
 
     # Cumulative property tax and upkeeping costs up to the time of sale
-    cumulative_property_tax_paid = combined_schedule.loc[:sell_in_months - 1, 'Monthly Property Tax'].sum()
-    cumulative_upkeeping_paid = combined_schedule.loc[:sell_in_months - 1, 'Monthly Upkeeping Cost'].sum()
+    cumulative_property_tax_paid = property_tax_schedule_df.loc[:sell_in_months - 1, 'Monthly Property Tax'].sum()
+    cumulative_upkeeping_paid = upkeeping_schedule_df.loc[:sell_in_months - 1, 'Monthly Upkeeping Cost'].sum()
 
     # Total costs incurred
     total_costs_incurred = (
@@ -242,11 +267,10 @@ def main():
     # Total money after selling the house
     total_money_after_sale = net_proceeds
 
-    # Investment balance at the time of sale (if invested the down payment)
-    investment_balance_at_sale = investment_schedule.loc[sell_in_months - 1, 'Investment Balance']
-
-    # Display results
+    # Display updated financial summary
     st.write(f"## Financial Summary at Year {sell_in_years}")
+    st.write(f"**Investment Balance (No House Purchase) at Sale:** ${investment_balance_strategy1_at_sale:,.2f}")
+    st.write(f"**Investment Balance (After House Expenses) at Sale:** ${investment_balance_strategy2_at_sale:,.2f}")
     st.write(f"**House Value at Sale:** ${sale_house_value:,.2f}")
     st.write(f"**Brokerage Fee (6%):** ${brokerage_fee:,.2f}")
     st.write(f"**Remaining Mortgage Balance:** ${remaining_mortgage_balance:,.2f}")
@@ -258,7 +282,6 @@ def main():
     st.write(f"**Total Costs Incurred (Down Payment + Mortgage Payments + Property Tax + Upkeeping):** ${total_costs_incurred:,.2f}")
     st.write(f"**Net Gain/Loss (Net Proceeds - Total Costs Incurred):** ${net_gain_loss:,.2f}")
     st.write(f"**Total Money After Sale:** ${total_money_after_sale:,.2f}")
-    st.write(f"**Investment Balance if Down Payment was Invested:** ${investment_balance_at_sale:,.2f}")
 
     # Display amortization schedule
     if st.checkbox("Show Amortization Schedule"):
@@ -303,34 +326,6 @@ def calculate_total_interest(loan_amount, monthly_interest_rate, loan_term_month
     total_interest = total_payment - loan_amount
     return total_interest
 
-def investment_growth(down_payment, investment_return_rate, loan_term_months):
-    investment_schedule = []
-    balance = down_payment
-    monthly_return_rate = (1 + investment_return_rate) ** (1/12) - 1
-    for n in range(1, loan_term_months + 1):
-        balance *= (1 + monthly_return_rate)
-        investment_schedule.append({
-            'Month': n,
-            'Investment Balance': balance
-        })
-    return pd.DataFrame(investment_schedule)
-
-def cumulative_rent_payments(initial_rent, annual_rent_increase_rate, loan_term_months):
-    rent_schedule = []
-    monthly_rent = initial_rent
-    cumulative_rent = 0
-    for n in range(1, loan_term_months + 1):
-        cumulative_rent += monthly_rent
-        rent_schedule.append({
-            'Month': n,
-            'Monthly Rent': monthly_rent,
-            'Cumulative Rent': cumulative_rent
-        })
-        # Increase rent at the end of each year
-        if n % 12 == 0:
-            monthly_rent *= (1 + annual_rent_increase_rate)
-    return pd.DataFrame(rent_schedule)
-
 def house_value_over_time(initial_value, appreciation_rate, loan_term_months):
     house_values = []
     value = initial_value
@@ -361,6 +356,62 @@ def upkeeping_schedule(loan_term_months, monthly_upkeeping_cost):
             'Monthly Upkeeping Cost': monthly_upkeeping_cost
         })
     return pd.DataFrame(upkeeping_list)
+
+def investment_strategies(
+    loan_term_months,
+    monthly_income,
+    monthly_expenses,
+    monthly_payment,  # Mortgage payment
+    monthly_property_tax_series,
+    monthly_upkeeping_cost,
+    investment_return_rate
+):
+    # Monthly compounding rate for investments
+    monthly_return_rate = (1 + investment_return_rate) ** (1/12) - 1
+
+    # Initialize investment balances
+    investment_balance_strategy1 = 0  # Did not buy a house
+    investment_balance_strategy2 = 0  # Did buy a house
+
+    # Lists to store balances over time
+    investment_strategy1 = []
+    investment_strategy2 = []
+
+    for month in range(1, loan_term_months + 1):
+        # Strategy 1: Did not buy a house
+        # Monthly investment amount
+        monthly_investment1 = monthly_income - monthly_expenses
+        monthly_investment1 = max(monthly_investment1, 0)
+        # Update investment balance with monthly investment and compounding
+        investment_balance_strategy1 = (investment_balance_strategy1 + monthly_investment1) * (1 + monthly_return_rate)
+        investment_strategy1.append({
+            'Month': month,
+            'Investment Balance (No House Purchase)': investment_balance_strategy1
+        })
+
+        # Strategy 2: Did buy a house
+        # Monthly property tax is constant now
+        monthly_property_tax = monthly_property_tax_series.iloc[0]
+        total_monthly_expenses = (
+            monthly_payment +
+            monthly_property_tax +
+            monthly_upkeeping_cost +
+            monthly_expenses
+        )
+        monthly_investment2 = monthly_income - total_monthly_expenses
+        monthly_investment2 = max(monthly_investment2, 0)
+        # Update investment balance with monthly investment and compounding
+        investment_balance_strategy2 = (investment_balance_strategy2 + monthly_investment2) * (1 + monthly_return_rate)
+        investment_strategy2.append({
+            'Month': month,
+            'Investment Balance (After House Expenses)': investment_balance_strategy2
+        })
+
+    # Convert to DataFrames
+    investment_strategy1_df = pd.DataFrame(investment_strategy1)
+    investment_strategy2_df = pd.DataFrame(investment_strategy2)
+
+    return investment_strategy1_df, investment_strategy2_df
 
 if __name__ == "__main__":
     main()
